@@ -2,7 +2,9 @@ import React from 'react';
 
 const EventCategory = (props) => {
     return (
-        <div>hello</div>
+        <section>
+            hello
+        </section> 
     )
 }
 
