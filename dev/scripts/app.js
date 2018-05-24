@@ -46,8 +46,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('hello');
-    fn.test();
+    // console.log('hello');
+    // fn.test();
     axios({
       method: 'GET',
       url: 'http://proxy.hackeryou.com',
@@ -60,24 +60,43 @@ class App extends React.Component {
         xmlToJSON: false
       }})
       .then((res) => {
-        console.log(res.data);
-        console.log(this);
+		const data = res.data;
+
+
 
         this.setState({
-          data: res.data
-        })
-      })
+          data: data
+		});
+
+		console.log(`UNSORTED DATA:
+		`, data )
+		console.log(`SORTED DATA:
+		`,  fn.sortByDate(data)  );
+
+		console.log(`get upcoming`,  fn.getUpcoming(20,  '2018/05/23', fn.sortByDate(data) )  )  ;
+		console.log(`age groups`, fn.getAgeGroups(data) );
+		console.log(`get unique event types`,  fn.getUniqueEventTypes(data) );
+
+		console.log(`EVENTS FOR CHILDREN
+		`,
+			 fn.filterByAgeGroup(data,  ['School-Age Children', 'Pre-School Children', 'All Children']) );
+		console.log(`ARTS EVENTS
+		`,
+			 fn.filterByEventType(data, [
+				"Art Exhibits",
+				"Culture Arts & Entertainment",
+				"Museum & Arts Pass",
+				"Artists in the Library"]) );
+
+		// fn.filterEachEventCategory(data);
+
+		console.log(`upcoming filtered`,  fn.filterCategoriesByDate ( fn.filterEachEventCategory(data) ) );
 
 
-      // console.log(`UNSORTED DATA:
-      // `,data )
-      // console.log(`SORTED DATA:
-      // `,  sortByDate(data)  );
+      }); //End of THEN
 
 
-      // console.log( getUpcoming(20,  '2018/05/23', sortByDate(data) )  )  ;
-      // console.log(getAgeGroups() );
-      // console.log(getUniqueEventTypes() );
+
 
 
 

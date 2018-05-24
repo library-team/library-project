@@ -39,7 +39,7 @@ fn.loginWithGoogle = function () {
 
 
 
-fn.getAgeGroups = function () {
+fn.getAgeGroups = function (data) {
 let ageGroups =  data.reduce( (allAges, event) => {
   let  ageGroups =  event["agegroups"];
   // console.log(ageGroups);
@@ -49,7 +49,7 @@ let ageGroups =  data.reduce( (allAges, event) => {
 
 }, [] );
 
-return getUnique(ageGroups);
+return fn.getUnique(ageGroups);
 
 }
 
@@ -59,12 +59,12 @@ fn.getUnique = function(array) {
 }
 
 
-fn.getUniqueEventTypes = function () {
+fn.getUniqueEventTypes = function (data) {
 	let eventTypes = data.reduce(( allTypes, event) => {
 		return allTypes.concat( [ event["eventtype1"] ]  );
 	}, [] );
 
-	return getUnique( eventTypes );
+	return fn.getUnique( eventTypes );
 
 }
 
@@ -92,7 +92,7 @@ fn.sortByDate = function (dataArr ) {
     // console.log(a['date1'], b['date1'], compareDates( a['date1'], b['date1'])  );
 
     //This sort it by starting date
-	return compareDates( a['date1'], b['date1']);
+	return fn.compareDates( a['date1'], b['date1']);
 
 	} );
 	return dataCopy;
@@ -100,14 +100,14 @@ fn.sortByDate = function (dataArr ) {
 
 
   //Today's Date is given as a 'yyyy/mm/dd' string
-  function getUpcoming (numberToGet, today, sortedData) {
+  fn.getUpcoming = function (numberToGet, today, sortedData) {
 
     let upcoming = [];
 
     //Start at the end of the data array since the data is sorted for furthest future events to be low index.
     let i = sortedData.length - 1 ;
     while (upcoming.length < numberToGet && i >= 0) {
-      if (compareDates(today, sortedData[i]['date1'] )  >= 0 ) {
+      if (fn.compareDates(today, sortedData[i]['date1'] )  >= 0 ) {
         upcoming.push( sortedData[i] )
       }
 
@@ -118,6 +118,83 @@ fn.sortByDate = function (dataArr ) {
 
   }//End of get upcoming
 
+fn.filterByAgeGroup = function (data, ageGroups) { //is array of age group strings
+	return data.filter( (event) => {
+		let result = false;
+
+		ageGroups.forEach(group =>    {
+			//If the event age groups string includes one of the selected age groups then set result to true. Else it will remain false.
+		 if (event.agegroups.includes(group) === true ) {	result = true; }
+		});
+		return result;
+	});
+}
+
+fn.filterByEventType = function (data, eventTypes) {
+	return data.filter( (event) => {
+		let result = false;
+
+		eventTypes.forEach(type =>    {
+
+		 if (event.eventtypes.includes(type) === true ) {	result = true; }
+		});
+		return result;
+	});
+
+}
+
+
+fn.filterEachEventCategory = function (data) {
+	const ageFilters = {
+		children: ['School-Age Children', 'Pre-School Children', 'All Children'],
+		students: ['Teen'],
+		seniors: ['Older Adult']
+	}
+
+	const typeFilters = {
+		arts: [
+		"Art Exhibits",
+		"Culture Arts & Entertainment",
+		"Museum & Arts Pass",
+		"Artists in the Library"],
+
+		newcomers: [
+		"ESL & Newcomer Programs",
+		"Adult Literacy"]
+	   }
+
+	const categories = {};
+	categories.upcoming = data;
+	categories.children = fn.filterByAgeGroup(data, ageFilters.children ) ;
+	categories.students = fn.filterByAgeGroup(data, ageFilters.students) ;
+	categories.seniors = fn.filterByAgeGroup(data, ageFilters.seniors)  ;
+	categories.newcomers = fn.filterByEventType(data, typeFilters.newcomers) ;
+	categories.arts = fn.filterByEventType(data, typeFilters.arts);
+
+	console.log(`categories`, categories);
+	return categories;
+}
+
+
+fn.filterCategoriesByDate = function (categories) {
+	const dateObj = new Date;
+	const today = `${dateObj.getFullYear()}/${dateObj.getMonth()+1}/${dateObj.getDate()}`;
+
+	for (const category in categories) {
+		let catArr = categories[category];
+		catArr = fn.sortByDate(catArr);
+		categories[category] = fn.getUpcoming(20, today, catArr);
+	}
+	return categories;
+
+}
+
+
+
+
+
 
 
 export default fn
+
+
