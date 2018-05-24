@@ -2,8 +2,13 @@ import React from 'react';
 
 const Header = (props) => {
     return (
-        <header>
-            <h1><span className="logo"></span> Library Events</h1>
+        <section className="Header clearfix">
+            <div className="headerTitle">
+                <div className="logo">
+                    <img src="../public/assets/bookIcon.svg" alt="Outline of an open book"/>
+                </div>
+                <h1>Library Events</h1>
+            </div>
             <nav>
                 <ul>
                     <li><a href="">Childrens Events</a></li>
@@ -16,7 +21,7 @@ const Header = (props) => {
             <div className="login">
                 <button onClick={props.fn.loginWithGoogle}>Login</button>
             </div>
-        </header>
+        </section>
     )
 }
 //set stated for logged in
