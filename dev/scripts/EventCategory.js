@@ -1,24 +1,33 @@
 import React from 'react';
 
-const app = {};
-
-// const EventCategory = (props) => {
 class EventCategory extends React.Component {
     constructor() {
         super()
 
         this.state = {
-            loadNumber: 3
+            loadNumber: 3,
+            title: ''
         }
 
-        this.clickityClick = this.clickityClick.bind(this);
+        this.loadMore = this.loadMore.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this)
     }
 
     componentDidMount() {
         
+        
+        if (this.props.appState !== null) {
+            const title = this.props.appState[0].title
+
+            this.setState({
+                title: title
+            })
+
+        }
+    
     }
 
-    clickityClick() {
+    loadMore() {
         
         console.log('clickity click');
 
@@ -29,9 +38,9 @@ class EventCategory extends React.Component {
 
     render() {
 
-        return this.props.appState === null ? null : (
+        return (
         <section>
-            <h2>Children's Events</h2>
+            <h2>{this.state.title}</h2>
             {this.props.appState.slice(0,this.state.loadNumber).map((event, i) => {
                 
                 return (
@@ -41,7 +50,7 @@ class EventCategory extends React.Component {
                 </div>
                 )
             })}
-            <a href="#" onClick={this.clickityClick}>See more...</a>
+            <a href="#" onClick={this.loadMore}>See more...</a>
         </section> 
         )
     }
