@@ -90,18 +90,20 @@ class App extends React.Component {
             <Header fn={fn}  appState={this.state.data} />
             {(this.state.user) &&  <SavedEvents fn={fn} appState={this.state.data} />}
           </header>
-          <aside>
-            {(this.state.data) && <UpcomingEvents fn={fn} appState={this.state.data} />}
-          </aside>
-          <main>
-          {(this.state.data) && <EventCategory fn={fn} appState={this.state.data} />}
-          {/* <EventCategory appState={this.state.data} />
-          <EventCategory appState={this.state.data} />
-          <EventCategory appState={this.state.data} />
-          <EventCategory appState={this.state.data} /> */}
-            <EventPage fn={fn} appState={this.state.data} />
-          </main>
-          {/* This main will be switched out for EventPage module */}
+          <div className="wrapper">
+            <aside>
+              {(this.state.data) && <UpcomingEvents fn={fn} appState={this.state.data} />}
+            </aside>
+            <main>
+            {(this.state.data) && <EventCategory fn={fn} appState={this.state.data} />}
+            {/* <EventCategory appState={this.state.data} />
+            <EventCategory appState={this.state.data} />
+            <EventCategory appState={this.state.data} />
+            <EventCategory appState={this.state.data} /> */}
+              <EventPage fn={fn} appState={this.state.data} />
+            </main>
+            {/* This main will be switched out for EventPage module */}
+          </div>
         </div>
       )
     }
