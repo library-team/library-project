@@ -32,10 +32,11 @@ class UpcomingEvents extends React.Component {
                         <div className="event">
                             <h3>{event.title}</h3>
                             <h4>{event.date}</h4>
+                            <a href="#"><i class="fas fa-info-circle"></i> Event Info</a>
                         </div>
                     )
                 })}
-                <a href="#" onClick={this.loadMore}>See more...</a>
+                <a className="button" href="#" onClick={this.loadMore}>See more events...</a>
             </section>
         )
     }

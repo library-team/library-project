@@ -1,9 +1,115 @@
-main {
-    width: 66.66%;
+//Add to global?
+
+ul, li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.button {
+    display: block;
+    width: fit-content;
+    width: -moz-fit-content;
+    border: 1px solid $darkBlue;
+    padding: 15px;
+    color: $darkBlue;
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 20px auto;
+    &:hover {
+        text-decoration: none;
+        background: $darkBlue;
+        color: white;
+    }
+}
+
+//Main + Aside
+
+.wrapper {
+    width: 70%;
+    margin: 0 auto;
+}
+
+main .EventCategory {
+    width: 70%;
+    margin-right: 5%;
     float: right;
+    border: 1px solid black;
+    border-radius: 20px;
+    overflow: hidden; 
+    h2 {
+        background: $darkBlue;
+        color: white;
+        margin-top: 0;
+        padding: 15px 10px 0 10px;
+    }
+    .event {
+        margin-bottom: 40px;
+        &:last-child {
+            margin-bottom: 0;
+        }  
+        h3, h4, p, a {
+            padding: 0 10px;
+        }
+        h3 {
+            margin-bottom: 2px;
+        }
+        h4 {
+            margin-top: 0;
+        }
+        ul {
+            li {
+                display: inline-block;
+                width: 33.33%;
+                a {
+                    color: $darkBlue;
+                    font-size: 1.8rem;
+                    i {
+                        color: $mediumBlue;
+                    }
+                }
+            }
+        }
+    }
 }
 
 aside {
-    width: 33.33%;
+    width: 25%;
     float: right;
+    background: $lightBlue;
+    border-radius: 20px;
+    overflow: hidden;
+    h2 {
+        color: white;
+        background: $red;
+        margin-top: 0;
+        padding: 15px 10px 0 10px;
+    }
+    .event {
+        margin-bottom: 30px;
+        h3, h4, {
+            padding: 0 10px;
+        }
+        h3 {
+            margin-bottom: 2px;
+            font-size: 1.7rem;
+        }
+        h4 {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size: 1.3rem;
+        }
+        a {
+            padding: 0 10px;
+        }
+    }
 }
