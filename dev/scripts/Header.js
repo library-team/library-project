@@ -3,7 +3,7 @@ import React from 'react';
 const Header = (props) => {
     return (
         <section className="Header clearfix">
-            <div className="headerTitle">
+            <div className="headerTitle clearfix">
                 <div className="logo">
                     <img src="../public/assets/bookIcon.svg" alt="Outline of an open book"/>
                 </div>
