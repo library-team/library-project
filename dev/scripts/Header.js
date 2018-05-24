@@ -14,13 +14,13 @@ const Header = (props) => {
                 </ul>
             </nav>
             <div className="login">
-                <button onClick={props.loginWithGoogle}>Login</button>
+                <button onClick={props.fn.loginWithGoogle}>Login</button>
             </div>
         </header>
     )
 }
 //set stated for logged in
-//bind function below 
+//bind function below
 //set props in Header component
 
 // loginWithGoogle() {

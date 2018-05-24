@@ -30,14 +30,23 @@ class App extends React.Component {
   constructor() {
     super()
 
+
+
     this.state = {
       data: null
     }
+
+    //Bind all the 'this' of all functions in fn to App.
+    for (const functionName in fn) {
+    let func = fn[functionName];
+    func = func.bind(this);
+    fn[functionName] = func;
+  }
   }
 
   componentDidMount() {
     console.log('hello');
-
+    fn.test();
     axios({
       method: 'GET',
       url: 'http://proxy.hackeryou.com',
@@ -64,19 +73,19 @@ class App extends React.Component {
       return (
         <div>
           <header>
-            <Header appState={this.state.data} />
-            <SavedEvents appState={this.state.data} />
+            <Header fn={fn}  appState={this.state.data} />
+            <SavedEvents fn={fn} appState={this.state.data} />
           </header>
           <aside>
-            <UpcomingEvents appState={this.state.data} />
+            <UpcomingEvents fn={fn} appState={this.state.data} />
           </aside>
           <main>
-          <EventCategory appState={this.state.data} />
+          <EventCategory fn={fn} appState={this.state.data} />
           {/* <EventCategory appState={this.state.data} />
           <EventCategory appState={this.state.data} />
           <EventCategory appState={this.state.data} />
           <EventCategory appState={this.state.data} /> */}
-            <EventPage appState={this.state.data} />
+            <EventPage fn={fn} appState={this.state.data} />
           </main>
           {/* This main will be switched out for EventPage module */}
         </div>
