@@ -69,13 +69,13 @@ class App extends React.Component {
       })
 
 
-      console.log(`UNSORTED DATA:
-      `,data )
-      console.log(`SORTED DATA:
-      `,  sortByDate(data)  );
+      // console.log(`UNSORTED DATA:
+      // `,data )
+      // console.log(`SORTED DATA:
+      // `,  sortByDate(data)  );
 
 
-      console.log( getUpcoming(20,  '2018/05/23', sortByDate(data) )  )  ;
+      // console.log( getUpcoming(20,  '2018/05/23', sortByDate(data) )  )  ;
       // console.log(getAgeGroups() );
       // console.log(getUniqueEventTypes() );
 
@@ -88,13 +88,13 @@ class App extends React.Component {
         <div>
           <header>
             <Header fn={fn}  appState={this.state.data} />
-            (state.user) &&  <SavedEvents fn={fn} appState={this.state.data} />
+            {(this.state.user) &&  <SavedEvents fn={fn} appState={this.state.data} />}
           </header>
           <aside>
-            (state.data) && <UpcomingEvents fn={fn} appState={this.state.data} />
+            {(this.state.data) && <UpcomingEvents fn={fn} appState={this.state.data} />}
           </aside>
           <main>
-          (state.data) && <EventCategory fn={fn} appState={this.state.data} />
+          {(this.state.data) && <EventCategory fn={fn} appState={this.state.data} />}
           {/* <EventCategory appState={this.state.data} />
           <EventCategory appState={this.state.data} />
           <EventCategory appState={this.state.data} />

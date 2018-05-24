@@ -1,6 +1,5 @@
 import React from 'react';
 
-// const EventCategory = (props) => {
 class EventCategory extends React.Component {
     constructor() {
         super()
@@ -11,22 +10,22 @@ class EventCategory extends React.Component {
         }
 
         this.loadMore = this.loadMore.bind(this);
-        // this.componentDidMount = this.componentDidMount.bind(this)
+        this.componentDidMount = this.componentDidMount.bind(this)
     }
 
-    // componentDidMount() {
+    componentDidMount() {
         
         
-    //     if (this.props.appState !== null) {
-    //         const title = this.props.appState[0].title
+        if (this.props.appState !== null) {
+            const title = this.props.appState[0].title
 
-    //         this.setState({
-    //             title: title
-    //         })
+            this.setState({
+                title: title
+            })
 
-    //     }
+        }
     
-    // }
+    }
 
     loadMore() {
         
@@ -39,7 +38,7 @@ class EventCategory extends React.Component {
 
     render() {
 
-        return this.props.appState === null ? null : (
+        return (
         <section>
             <h2>{this.state.title}</h2>
             {this.props.appState.slice(0,this.state.loadNumber).map((event, i) => {
