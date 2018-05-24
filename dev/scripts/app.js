@@ -1,12 +1,18 @@
+//Node modules
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import firebase from 'firebase';
+
+//Components
 import EventCategory from './EventCategory';
 import Header from './Header';
 import SavedEvents from './SavedEvents';
 import UpcomingEvents from './UpcomingEvents';
 import EventPage from './EventPage.js';
+
+//Other Modules
+import fn from './fn'
 
 const config = {
   apiKey: "AIzaSyDP7BfVejFMc-KfGmwYXRDPt7K4Sskr42U",
@@ -51,13 +57,13 @@ class App extends React.Component {
           data: res.data
         })
       })
-    
+
   }
 
     render() {
       return (
         <div>
-          <header> 
+          <header>
             <Header appState={this.state.data} />
             <SavedEvents appState={this.state.data} />
           </header>
