@@ -10,7 +10,7 @@ const Header = (props) => {
                 <h1>Library Events</h1>
             </div>
             <nav>
-                <ul>
+                <ul className="clearfix">
                     <li><a href="">Childrens Events</a></li>
                     <li><a href="">Youth Events</a></li>
                     <li><a href="">Seniors Events</a></li>
