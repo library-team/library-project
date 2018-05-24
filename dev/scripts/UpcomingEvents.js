@@ -10,22 +10,7 @@ class UpcomingEvents extends React.Component {
         }
 
         this.loadMore = this.loadMore.bind(this);
-        // this.componentDidMount = this.componentDidMount.bind(this)
     }
-
-    // componentDidMount() {
-
-
-    //     if (this.props.appState !== null) {
-    //         const title = this.props.appState[0].title
-
-    //         this.setState({
-    //             title: title
-    //         })
-
-    //     }
-
-    // }
 
     loadMore() {
 
@@ -38,7 +23,7 @@ class UpcomingEvents extends React.Component {
 
     render() {
 
-        return this.props.appState === null ? null : (
+        return (
             <section>
                 <h2>Upcoming Events</h2>
                 {this.props.appState.slice(0, this.state.loadNumber).map((event, i) => {
