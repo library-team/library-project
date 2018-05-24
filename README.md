@@ -1,5 +1,3 @@
-# Getting Started
+Using React boiler plate from https://github.com/HackerYou/react-boilerplate
 
-1. `git clone` this repo
-2. `npm install`
-3. enjoy!
+Icon assets from Noun Project, created by Made by Made 

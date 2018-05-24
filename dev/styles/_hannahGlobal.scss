@@ -1,0 +1,63 @@
+@import 'setup';
+
+.Header {
+    background: $darkBlue;
+    color: #fff;
+    position: relative;
+    .headerTitle {
+        width: 40%;
+        border: 1px solid gold;
+        float: left;
+        position: relative;
+        .logo{
+            border: 1px solid tan;
+            width: 15%;
+            // display: inline-block;
+            position: absolute;
+            // left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            img {
+                width: 100%;
+            }
+        }
+        h1 {
+            // display: inline-block;
+            border: 1px solid red;
+            float: left;
+            margin-left: 15%;
+            //position: absolute;
+            //margin: 0;
+            // left: 20%;
+            // top: 60%;
+            // transform: translateY(50%);
+        }
+    }
+    nav {
+        border: 2px solid pink;
+        margin-top: 20px;
+        float: left;
+        ul {
+            padding: 0;
+            list-style-type: none;
+            li {
+                float: left;
+                a {
+                    color: #fff;
+                    text-decoration: none;
+                    padding: 10px;
+                }
+                a:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    .login {
+        border: 2px solid orange;
+        position: absolute;
+        right: 1%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
