@@ -33,7 +33,8 @@ class App extends React.Component {
 
 
     this.state = {
-      data: null
+	  data: null,
+	  user: null
     }
 
     //Bind all the 'this' of all functions in fn to App.
@@ -67,20 +68,33 @@ class App extends React.Component {
         })
       })
 
-  }
+
+      console.log(`UNSORTED DATA:
+      `,data )
+      console.log(`SORTED DATA:
+      `,  sortByDate(data)  );
+
+
+      console.log( getUpcoming(20,  '2018/05/23', sortByDate(data) )  )  ;
+      // console.log(getAgeGroups() );
+      // console.log(getUniqueEventTypes() );
+
+
+
+  } //End of Component Did Mount
 
     render() {
       return (
         <div>
           <header>
             <Header fn={fn}  appState={this.state.data} />
-            <SavedEvents fn={fn} appState={this.state.data} />
+            (state.user) &&  <SavedEvents fn={fn} appState={this.state.data} />
           </header>
           <aside>
-            <UpcomingEvents fn={fn} appState={this.state.data} />
+            (state.data) && <UpcomingEvents fn={fn} appState={this.state.data} />
           </aside>
           <main>
-          <EventCategory fn={fn} appState={this.state.data} />
+          (state.data) && <EventCategory fn={fn} appState={this.state.data} />
           {/* <EventCategory appState={this.state.data} />
           <EventCategory appState={this.state.data} />
           <EventCategory appState={this.state.data} />
