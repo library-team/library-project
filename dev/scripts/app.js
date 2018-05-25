@@ -30,11 +30,10 @@ class App extends React.Component {
   constructor() {
     super()
 
-
-
     this.state = {
 	  data: null,
-	  user: null
+	  user: null,
+	  eventData: null
     }
 
     //Bind all the 'this' of all functions in fn to App.
@@ -42,11 +41,19 @@ class App extends React.Component {
     let func = fn[functionName];
     func = func.bind(this);
     fn[functionName] = func;
-  }
+	}
   }
 
   componentDidMount() {
-    // console.log('hello');
+	let dbRef = firebase.database().ref('eventData');
+	dbRef.on('value',(snapshot) => {
+
+		console.log('event data from firebase', snapshot.val() );
+		this.setState({
+		  eventData: snapshot.val()
+		});
+	  });
+	// console.log('hello');
     // fn.test();
     axios({
       method: 'GET',
@@ -62,36 +69,15 @@ class App extends React.Component {
       .then((res) => {
 		const data = res.data;
 
-
-
         this.setState({
           data: data
 		});
 
-		console.log(`UNSORTED DATA:
-		`, data )
-		console.log(`SORTED DATA:
-		`,  fn.sortByDate(data)  );
+		const filteredData =  fn.filterCategoriesByDate ( fn.filterEachEventCategory(data) );
 
-		console.log(`get upcoming`,  fn.getUpcoming(20,  '2018/05/23', fn.sortByDate(data) )  )  ;
-		console.log(`age groups`, fn.getAgeGroups(data) );
-		console.log(`get unique event types`,  fn.getUniqueEventTypes(data) );
+		console.log(`All categories filtered`, filteredData  );
 
-		console.log(`EVENTS FOR CHILDREN
-		`,
-			 fn.filterByAgeGroup(data,  ['School-Age Children', 'Pre-School Children', 'All Children']) );
-		console.log(`ARTS EVENTS
-		`,
-			 fn.filterByEventType(data, [
-				"Art Exhibits",
-				"Culture Arts & Entertainment",
-				"Museum & Arts Pass",
-				"Artists in the Library"]) );
-
-		// fn.filterEachEventCategory(data);
-
-		console.log(`upcoming filtered`,  fn.filterCategoriesByDate ( fn.filterEachEventCategory(data) ) );
-
+		dbRef.set(filteredData);
 
       }); //End of THEN
 
