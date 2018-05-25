@@ -1,11 +1,12 @@
 import React from 'react';
 
-const EventPage = (props) => {
+class EventPage extends React.Component {
     
-    
-    return (
-        <div>hello</div>
-    )
+    render() {
+        return (
+            <div>hello</div>
+        )
+    }
 }
 
 export default EventPage;
