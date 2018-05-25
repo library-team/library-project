@@ -36,7 +36,7 @@ class UpcomingEvents extends React.Component {
                         </div>
                     )
                 })}
-                <a className="button" href="#" onClick={this.loadMore}>See more events...</a>
+                <button className="button" href="#" onClick={this.loadMore}>See more events...</button>
             </section>
         )
     }
