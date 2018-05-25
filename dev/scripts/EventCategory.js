@@ -54,7 +54,7 @@ class EventCategory extends React.Component {
 
                         <ul>
                             <li>
-                                <Link to="/events"><i className="fas fa-info-circle"></i> Event Info</Link>
+                                <Link to={`/events/${event.id}`}><i className="fas fa-info-circle"></i> Event Info</Link>
                                 {/* <Route path="/events" component={EventPage} /> */}
                             </li>
                             {/* <li><i className="fas fa-info-circle"></i> Event Info</a></li> */}
