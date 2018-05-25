@@ -89,6 +89,8 @@ fn.compareDates = function (date1, date2 ) {
 
 
 fn.sortByDate = function (dataArr ) {
+	console.log(dataArr);
+	
 	const dataCopy = Array.from(dataArr);
 
 	dataCopy.sort((a,b) => {
@@ -172,7 +174,7 @@ fn.filterEachEventCategory = function (data) {
 	categories.seniors = fn.filterByAgeGroup(data, ageFilters.seniors)  ;
 	categories.newcomers = fn.filterByEventType(data, typeFilters.newcomers) ;
 	categories.arts = fn.filterByEventType(data, typeFilters.arts);
-	categories.saved = null;
+	// categories.saved = null;
 	return categories;
 }
 
