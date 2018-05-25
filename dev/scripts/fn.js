@@ -65,8 +65,11 @@ fn.getUniqueEventTypes = function (data) {
 	}, [] );
 
 	return fn.getUnique( eventTypes );
-
 }
+//Function Calls to get the age groups and event types (not used at runtime)
+		// console.log(`age groups`, fn.getAgeGroups(data) );
+		// console.log(`get unique event types`,  fn.getUniqueEventTypes(data) );
+
 
 //Takes dates in 'yyyy/mm/dd' format
 fn.compareDates = function (date1, date2 ) {
@@ -154,7 +157,6 @@ fn.filterEachEventCategory = function (data) {
 	const typeFilters = {
 		arts: [
 		"Art Exhibits",
-		"Culture Arts & Entertainment",
 		"Museum & Arts Pass",
 		"Artists in the Library"],
 
@@ -170,16 +172,17 @@ fn.filterEachEventCategory = function (data) {
 	categories.seniors = fn.filterByAgeGroup(data, ageFilters.seniors)  ;
 	categories.newcomers = fn.filterByEventType(data, typeFilters.newcomers) ;
 	categories.arts = fn.filterByEventType(data, typeFilters.arts);
-
-	console.log(`categories`, categories);
+	categories.saved = null;
 	return categories;
 }
 
 
 fn.filterCategoriesByDate = function (categories) {
 	const dateObj = new Date;
-	const today = `${dateObj.getFullYear()}/${dateObj.getMonth()+1}/${dateObj.getDate()}`;
-
+	const today = `${dateObj.getFullYear()}/${
+		//If the month + 1 is less than 10 add a zero
+		(dateObj.getMonth()+1 < 10  ) ? '0' + (dateObj.getMonth()+1)  : dateObj.getMonth()+1
+	}/${  dateObj.getDate() < 10  ?  '0' + dateObj.getDate()  :   dateObj.getDate()}`;
 	for (const category in categories) {
 		let catArr = categories[category];
 		catArr = fn.sortByDate(catArr);

@@ -30,11 +30,10 @@ class App extends React.Component {
   constructor() {
     super()
 
-
-
     this.state = {
-	  data: null,
-	  user: null
+	//   data: null,
+	  user: null,
+	  eventData: null
     }
 
     //Bind all the 'this' of all functions in fn to App.
@@ -42,12 +41,19 @@ class App extends React.Component {
     let func = fn[functionName];
     func = func.bind(this);
     fn[functionName] = func;
-  }
+	}
   }
 
   componentDidMount() {
-    // console.log('hello');
-    // fn.test();
+	let dbRef = firebase.database().ref('eventData');
+	dbRef.on('value',(snapshot) => {
+
+		console.log('event data from firebase', snapshot.val() );
+		this.setState({
+		  eventData: snapshot.val()
+		});
+	  });
+
     axios({
       method: 'GET',
       url: 'http://proxy.hackeryou.com',
@@ -62,42 +68,17 @@ class App extends React.Component {
       .then((res) => {
 		const data = res.data;
 
+        // this.setState({
+        //   data: data
+		// });
 
+		const filteredData =  fn.filterCategoriesByDate ( fn.filterEachEventCategory(data) );
 
-        this.setState({
-          data: data
-		});
+		console.log(`All categories filtered`, filteredData  );
 
-		console.log(`UNSORTED DATA:
-		`, data )
-		console.log(`SORTED DATA:
-		`,  fn.sortByDate(data)  );
-
-		console.log(`get upcoming`,  fn.getUpcoming(20,  '2018/05/23', fn.sortByDate(data) )  )  ;
-		console.log(`age groups`, fn.getAgeGroups(data) );
-		console.log(`get unique event types`,  fn.getUniqueEventTypes(data) );
-
-		console.log(`EVENTS FOR CHILDREN
-		`,
-			 fn.filterByAgeGroup(data,  ['School-Age Children', 'Pre-School Children', 'All Children']) );
-		console.log(`ARTS EVENTS
-		`,
-			 fn.filterByEventType(data, [
-				"Art Exhibits",
-				"Culture Arts & Entertainment",
-				"Museum & Arts Pass",
-				"Artists in the Library"]) );
-
-		// fn.filterEachEventCategory(data);
-
-		console.log(`upcoming filtered`,  fn.filterCategoriesByDate ( fn.filterEachEventCategory(data) ) );
-
+		dbRef.set(filteredData);
 
       }); //End of THEN
-
-
-
-
 
 
   } //End of Component Did Mount
@@ -107,19 +88,25 @@ class App extends React.Component {
         <div>
           <header>
             <Header fn={fn}  appState={this.state.data} />
-            {(this.state.user) &&  <SavedEvents fn={fn} appState={this.state.data} />}
+            {(this.state.user) &&  <SavedEvents fn={fn} appState={this.state.eventData.saved} />}
           </header>
           <div className="wrapper">
             <aside>
-              {(this.state.data) && <UpcomingEvents fn={fn} appState={this.state.data} />}
+			  {(this.state.eventData)
+				&& <UpcomingEvents fn={fn} appState={this.state.eventData.upcoming} />}
             </aside>
             <main>
-            {(this.state.data) && <EventCategory fn={fn} appState={this.state.data} />}
-            {/* <EventCategory appState={this.state.data} />
-            <EventCategory appState={this.state.data} />
-            <EventCategory appState={this.state.data} />
-            <EventCategory appState={this.state.data} /> */}
-              <EventPage fn={fn} appState={this.state.data} />
+			{(this.state.eventData)
+			&& (
+			<React.Fragment>
+				<EventCategory fn={fn} title="Children's Events"  appState={this.state.eventData.children} />}
+				<EventCategory fn={fn} title="Student Events" appState={this.state.eventData.students} />
+				<EventCategory fn={fn} title="Events for Seniors" appState={this.state.eventData.seniors} />
+				<EventCategory fn={fn} title="Events for Newcomers to Canada" appState={this.state.eventData.newcomers} />
+				<EventCategory fn={fn} title="Events for Art Lovers" appState={this.state.eventData.arts} />
+			</React.Fragment>
+			)}
+              {/* <EventPage fn={fn} appState={this.state.data} /> */}
             </main>
             {/* This main will be switched out for EventPage module */}
           </div>
