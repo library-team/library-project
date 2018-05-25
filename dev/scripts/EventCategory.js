@@ -1,4 +1,9 @@
 import React from 'react';
+import EventPage from './EventPage'
+import {
+    BrowserRouter as Router,
+    Route, Link
+} from 'react-router-dom';
 
 class EventCategory extends React.Component {
     constructor() {
@@ -43,19 +48,22 @@ class EventCategory extends React.Component {
                 
                 return (
                 <div className="event" key={i}>
-                    <h3>{this.props.title}</h3>
+                    <h3>{event.title}</h3>
                     <h4>{event.date}</h4>
                         <p dangerouslySetInnerHTML={{ __html: event.description }}></p>
-                    <ul>
-                        <li><a href="#"><i className="fas fa-info-circle"></i> Event Info</a></li>
-                        <li><a href="#"><i className="fas fa-bookmark"></i> Save Event</a></li>
-                        <li><a href="#"><i className="fas fa-calendar-plus"></i> Add to Calendar</a></li>
-                    </ul>
-                    
+                    <Router>
+                        <ul>
+                                <li><Link to="/events">Event Info</Link>
+                                    <Route path="/events" component={EventPage} /></li>
+                            {/* <li><i className="fas fa-info-circle"></i> Event Info</a></li> */}
+                            <li><a href="#"><i className="fas fa-bookmark"></i> Save Event</a></li>
+                            <li><a href="#"><i className="fas fa-calendar-plus"></i> Add to Calendar</a></li>
+                        </ul>
+                    </Router>
                 </div>
                 )
             })}
-            <a className="button" href="#" onClick={this.loadMore}>See more events...</a>
+            <button className="button" href="#" onClick={this.loadMore}>See more events...</button>
         </section> 
         )
     }

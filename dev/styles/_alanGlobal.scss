@@ -35,8 +35,11 @@ a {
 //Main + Aside
 
 .wrapper {
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
+    @media (max-width: 940px) {
+        width: 90%;
+    }
 }
 
 main h4, aside h4 {
@@ -44,12 +47,16 @@ main h4, aside h4 {
 }
 
 main .EventCategory {
-    width: 70%;
-    margin-right: 5%;
-    float: right;
+    width: calc(95% - 300px);
+    min-width: 300px;
+    margin: 0 5% 30px 0;
+    float: left;
     border: 1px solid black;
     border-radius: 20px;
-    overflow: hidden; 
+    overflow: hidden;
+    @media (max-width: 700px) {
+        width: 100%;
+    }
     h2 {
         background: $darkBlue;
         color: white;
@@ -88,10 +95,15 @@ main .EventCategory {
 
 aside {
     width: 25%;
+    min-width: 300px;
     float: right;
     background: $lightBlue;
     border-radius: 20px;
     overflow: hidden;
+    @media (max-width: 700px) {
+        float: left;
+        width: 100%;
+    }
     h2 {
         color: white;
         background: $red;
