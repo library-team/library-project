@@ -47,7 +47,8 @@ class App extends React.Component {
     this.state = {
 	//   data: null,
 	  user: null,
-    eventData: null
+	eventData: null,
+	dbRefUser: null
     }
 
     //Bind all the 'this' of all functions in fn to App.
@@ -60,49 +61,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-  //login-logout listener
-  firebase.auth().onAuthStateChanged((user) => {
-    console.log('user logged in', user);
-    
-    //If the user info returned from google popup is not null, then the user is logged in 
-    if (user !== null) {
-      let dbRefUser = firebase.database().ref('users/'+ user.uid);
-      dbRefUser.once('value', (snapshot) => {
-        if(snapshot.exists()) {
-          let loggedInUser = snapshot.val();
-          this.setState({
-            loggedIn: true,
-            user: loggedInUser
-          })
+  //login-logout listener, this passes the user object to it's callback. If logged out, it passes null.
+  firebase.auth().onAuthStateChanged(fn.handleAuthChange);
 
-        } else { //if the user does not already exist in the database- create them 
-          console.log('new user created');
-          const loggedInUser = {
-            id: user.uid,
-            name: user.displayName,
-            photo: user.photoURL, 
-            savedEvents: null
-          }
-          this.setState({
-            loggedIn: true,
-            user: loggedInUser
-          })
-          dbRefUser.set(loggedInUser);
-        }
-      })
-    } else { //user is logging out 
-      this.setState({
-        loggedIn: false, 
-        user: null
-      })
-    }
-        
-  })
-  //event data listener
 	let dbRef = firebase.database().ref('eventData');
 	dbRef.on('value',(snapshot) => {
-
-		console.log('event data from firebase', snapshot.val() );
+		// console.log('event data from firebase', snapshot.val() );
 		this.setState({
 		  eventData: snapshot.val()
 		});
@@ -122,13 +86,9 @@ class App extends React.Component {
       .then((res) => {
 		const data = res.data;
 
-        // this.setState({
-        //   data: data
-		// });
-
 		const filteredData =  fn.filterCategoriesByDate ( fn.filterEachEventCategory(data) );
 
-		console.log(`All categories filtered`, filteredData  );
+		// console.log(`All categories filtered`, filteredData  );
 
 		dbRef.set(filteredData);
 
@@ -146,8 +106,8 @@ class App extends React.Component {
 				{/* {(this.state.user) &&  <SavedEvents fn={fn} appState={this.state.eventData.saved} />} */}
 			</header>
 			<div className="wrapper">
-				
-				<Route exact path="/events" component={EventPage} />
+
+				<Route path="/events/:event_id" component={EventPage} />
 
 				<aside>
 				{(this.state.eventData)
@@ -156,17 +116,17 @@ class App extends React.Component {
 				<main>
 					{(this.state.eventData)
 					&& (
-					 <React.Fragment> 
+					 <React.Fragment>
 
 						{/* <Route exact path="/" component={Hello} /> */}
 						<Route exact path="/" render={() => <EventCategory fn={fn} title="Children's Events" events={this.state.eventData.children} />} />
 						<Route exact path="/" component={() => <EventCategory fn={fn} title="Student Events" events={this.state.eventData.students} />} />
-						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Seniors" events={this.state.eventData.seniors} />} />	
+						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Seniors" events={this.state.eventData.seniors} />} />
 						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Newcomers to Canada" events={this.state.eventData.newcomers} />} />
 						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Art Lovers" events={this.state.eventData.arts} />} />
 
 					</React.Fragment>
-							
+
 
 						)}
 					{/* <EventPage fn={fn} appState={this.state.data} /> */}

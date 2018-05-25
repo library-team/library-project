@@ -28,8 +28,77 @@ fn.loginWithGoogle = function () {
 }
 
 fn.logout = function () {
+	console.log('log out function')
 	firebase.auth().signOut();
 }
+
+
+fn.handleAuthChange = function (user) {
+	//If the user info returned from google popup is not null, then the user is logged in
+	console.log(`user from handle auth change`, user);
+	if (user !== null) {
+		let dbRefUser = firebase.database().ref('users/'+ user.uid);
+		//Add value listener to user node in database
+		dbRefUser.on('value', (snapshot) => {
+		  if(snapshot.exists()) {
+			let loggedInUser = snapshot.val();
+
+			this.setState({
+			  loggedIn: true,
+			  user: loggedInUser,
+			});
+
+			this.dbRefUser = dbRefUser;
+		  } else { //if the user does not already exist in the database- create them
+			console.log('new user created');
+			const loggedInUser = {
+			  id: user.uid,
+			  name: user.displayName,
+			  photo: user.photoURL,
+			  //savedEvents
+			}
+			this.setState({
+			  loggedIn: true,
+			  user: loggedInUser
+			})
+			dbRefUser.set(loggedInUser);
+		  }
+
+		});
+	} else { //user is logging out
+		console.log(`auth change log out`)
+		this.setState({
+		loggedIn: false,
+		user: null
+		});
+
+		//Remove the value event listener
+		if (this.dbRefUser) {
+			this.dbRefUser.off();
+		}
+	}//end of else statement
+}
+
+fn.saveEvent = function (e, event) {
+e.preventDefault();
+console.log(event);
+
+// if (this.state.user) {
+// 	const dbRefSaved =  firebase.database().ref('users/' + this.state.user.id + '/savedEvents');
+
+// 	dbRefSaved.push(event);
+
+// }
+
+//If user is logged in, push event to that user's savedEvents node
+
+
+//If user is not logged in prompt them to log in
+
+}
+
+
+
 
 
 
@@ -85,7 +154,7 @@ fn.compareDates = function (date1, date2 ) {
 
 fn.sortByDate = function (dataArr ) {
 	// console.log(dataArr);
-	
+
 	const dataCopy = Array.from(dataArr);
 
 	dataCopy.sort((a,b) => {
@@ -188,14 +257,6 @@ fn.filterCategoriesByDate = function (categories) {
 	return categories;
 
 }
-
-fn.saveEvent = function (e, event) {
-	e.preventDefault()
-	console.log(event);
-	
-}
-
-
 
 
 
