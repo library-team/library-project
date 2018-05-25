@@ -107,7 +107,7 @@ class App extends React.Component {
 			</header>
 			<div className="wrapper">
 
-				<Route exact path="/events" component={EventPage} />
+				<Route path="/events/:event_id" component={EventPage} />
 
 				<aside>
 				{(this.state.eventData)
