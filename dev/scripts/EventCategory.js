@@ -5,12 +5,12 @@ class EventCategory extends React.Component {
         super()
 
         this.state = {
-            loadNumber: 3,
-            title: ''
+            loadNumber: 3
+            // title: ''
         }
 
         this.loadMore = this.loadMore.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this)
+        // this.componentDidMount = this.componentDidMount.bind(this)
     }
 
     // componentDidMount() {
@@ -29,8 +29,6 @@ class EventCategory extends React.Component {
 
     loadMore() {
         
-        console.log('clickity click');
-
         this.setState({
             loadNumber: 10
         })
@@ -41,10 +39,10 @@ class EventCategory extends React.Component {
         return (
         <section className="EventCategory">
             <h2>{this.props.title}</h2>
-            {this.props.appState.slice(0,this.state.loadNumber).map((event, i) => {
+            {this.props.events.slice(0,this.state.loadNumber).map((event, i) => {
                 
                 return (
-                <div className="event">
+                <div className="event" key={i}>
                     <h3>{this.props.title}</h3>
                     <h4>{event.date}</h4>
                         <p dangerouslySetInnerHTML={{ __html: event.description }}></p>

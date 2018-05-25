@@ -88,7 +88,7 @@ class App extends React.Component {
         <div>
           <header>
             <Header fn={fn}  appState={this.state.data} />
-            {(this.state.user) &&  <SavedEvents fn={fn} appState={this.state.eventData.saved} />}
+            {/* {(this.state.user) &&  <SavedEvents fn={fn} appState={this.state.eventData.saved} />} */}
           </header>
           <div className="wrapper">
             <aside>
@@ -99,11 +99,11 @@ class App extends React.Component {
 			{(this.state.eventData)
 			&& (
 			<React.Fragment>
-				<EventCategory fn={fn} title="Children's Events"  appState={this.state.eventData.children} />}
-				<EventCategory fn={fn} title="Student Events" appState={this.state.eventData.students} />
-				<EventCategory fn={fn} title="Events for Seniors" appState={this.state.eventData.seniors} />
-				<EventCategory fn={fn} title="Events for Newcomers to Canada" appState={this.state.eventData.newcomers} />
-				<EventCategory fn={fn} title="Events for Art Lovers" appState={this.state.eventData.arts} />
+				<EventCategory fn={fn} title="Children's Events"  events={this.state.eventData.children} />}
+				<EventCategory fn={fn} title="Student Events" events={this.state.eventData.students} />
+        <EventCategory fn={fn} title="Events for Seniors" events={this.state.eventData.seniors} />
+        <EventCategory fn={fn} title="Events for Newcomers to Canada" events={this.state.eventData.newcomers} />
+        <EventCategory fn={fn} title="Events for Art Lovers" events={this.state.eventData.arts} />
 			</React.Fragment>
 			)}
               {/* <EventPage fn={fn} appState={this.state.data} /> */}

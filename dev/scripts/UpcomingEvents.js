@@ -29,7 +29,7 @@ class UpcomingEvents extends React.Component {
                 {this.props.appState.slice(0, this.state.loadNumber).map((event, i) => {
 
                     return (
-                        <div className="event">
+                        <div className="event" key={i}>
                             <h3>{event.title}</h3>
                             <h4>{event.date}</h4>
                             <a href="#"><i className="fas fa-info-circle"></i> Event Info</a>
