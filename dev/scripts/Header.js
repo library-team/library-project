@@ -19,7 +19,10 @@ const Header = (props) => {
                 </ul>
             </nav>
             <div className="login">
-                <button onClick={props.fn.loginWithGoogle}>Login</button>
+            {(props.appState.user === null) 
+               ? <button onClick={props.fn.loginWithGoogle}>Login</button>
+                : <button onClick={props.fn.logout}>Log Out</button>
+            }
             </div>
         </section>
     )

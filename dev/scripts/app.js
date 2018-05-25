@@ -33,7 +33,7 @@ class App extends React.Component {
     this.state = {
 	//   data: null,
 	  user: null,
-	  eventData: null
+    eventData: null
     }
 
     //Bind all the 'this' of all functions in fn to App.
@@ -41,10 +41,50 @@ class App extends React.Component {
     let func = fn[functionName];
     func = func.bind(this);
     fn[functionName] = func;
-	}
+    }
+    fn.logout();
   }
 
   componentDidMount() {
+  //login-logout listener
+  firebase.auth().onAuthStateChanged((user) => {
+    console.log('user logged in', user);
+    
+    //If the user info returned from google popup is not null, then the user is logged in 
+    if (user !== null) {
+      let dbRefUser = firebase.database().ref('users/'+ user.uid);
+      dbRefUser.once('value', (snapshot) => {
+        if(snapshot.exists()) {
+          let loggedInUser = snapshot.val();
+          this.setState({
+            loggedIn: true,
+            user: loggedInUser
+          })
+
+        } else { //if the user does not already exist in the database- create them 
+          console.log('new user created');
+          const loggedInUser = {
+            id: user.uid,
+            name: user.displayName,
+            photo: user.photoURL, 
+            savedEvents: null
+          }
+          this.setState({
+            loggedIn: true,
+            user: loggedInUser
+          })
+          dbRefUser.set(loggedInUser);
+        }
+      })
+    } else { //user is logging out 
+      this.setState({
+        loggedIn: false, 
+        user: null
+      })
+    }
+        
+  })
+  //event data listener
 	let dbRef = firebase.database().ref('eventData');
 	dbRef.on('value',(snapshot) => {
 
@@ -87,7 +127,7 @@ class App extends React.Component {
       return (
         <div>
           <header>
-            <Header fn={fn}  appState={this.state.data} />
+            <Header fn={fn}  appState={this.state} />
             {/* {(this.state.user) &&  <SavedEvents fn={fn} appState={this.state.eventData.saved} />} */}
           </header>
           <div className="wrapper">
