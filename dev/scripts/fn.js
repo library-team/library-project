@@ -189,6 +189,12 @@ fn.filterCategoriesByDate = function (categories) {
 
 }
 
+fn.saveEvent = function (e, event) {
+	e.preventDefault()
+	console.log(event);
+	
+}
+
 
 
 
