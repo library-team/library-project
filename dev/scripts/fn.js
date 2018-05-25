@@ -21,21 +21,16 @@ fn.handleChange = function (e) {
 
 
 fn.loginWithGoogle = function () {
-      console.log('clicked the button');
-      const provider = new firebase.auth.GoogleAuthProvider();
+	console.log('clicked the button');
+	const provider = new firebase.auth.GoogleAuthProvider();
 
-      firebase.auth().signInWithPopup(provider)
-          .then((res) => {
-              console.log(res);
-              this.setState ({
-                loggedIn: true,
-                user: res.user
-              })
-          })
-          .catch((err) => {
-              console.log(err);
-          })
-  }
+	firebase.auth().signInWithPopup(provider);
+}
+
+fn.logout = function () {
+	firebase.auth().signOut();
+}
+
 
 
 
@@ -89,7 +84,7 @@ fn.compareDates = function (date1, date2 ) {
 
 
 fn.sortByDate = function (dataArr ) {
-	console.log(dataArr);
+	// console.log(dataArr);
 	
 	const dataCopy = Array.from(dataArr);
 
