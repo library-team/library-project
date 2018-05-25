@@ -31,7 +31,7 @@ class App extends React.Component {
     super()
 
     this.state = {
-	  data: null,
+	//   data: null,
 	  user: null,
 	  eventData: null
     }
@@ -53,8 +53,7 @@ class App extends React.Component {
 		  eventData: snapshot.val()
 		});
 	  });
-	// console.log('hello');
-    // fn.test();
+
     axios({
       method: 'GET',
       url: 'http://proxy.hackeryou.com',
@@ -69,9 +68,9 @@ class App extends React.Component {
       .then((res) => {
 		const data = res.data;
 
-        this.setState({
-          data: data
-		});
+        // this.setState({
+        //   data: data
+		// });
 
 		const filteredData =  fn.filterCategoriesByDate ( fn.filterEachEventCategory(data) );
 
@@ -82,10 +81,6 @@ class App extends React.Component {
       }); //End of THEN
 
 
-
-
-
-
   } //End of Component Did Mount
 
     render() {
@@ -93,19 +88,25 @@ class App extends React.Component {
         <div>
           <header>
             <Header fn={fn}  appState={this.state.data} />
-            {(this.state.user) &&  <SavedEvents fn={fn} appState={this.state.data} />}
+            {(this.state.user) &&  <SavedEvents fn={fn} appState={this.state.eventData.saved} />}
           </header>
           <div className="wrapper">
             <aside>
-              {(this.state.data) && <UpcomingEvents fn={fn} appState={this.state.data} />}
+			  {(this.state.eventData)
+				&& <UpcomingEvents fn={fn} appState={this.state.eventData.upcoming} />}
             </aside>
             <main>
-            {(this.state.data) && <EventCategory fn={fn} appState={this.state.data} />}
-            {/* <EventCategory appState={this.state.data} />
-            <EventCategory appState={this.state.data} />
-            <EventCategory appState={this.state.data} />
-            <EventCategory appState={this.state.data} /> */}
-              <EventPage fn={fn} appState={this.state.data} />
+			{(this.state.eventData)
+			&& (
+			<React.Fragment>
+				<EventCategory fn={fn} title="Children's Events"  appState={this.state.eventData.children} />}
+				<EventCategory fn={fn} title="Student Events" appState={this.state.eventData.students} />
+				<EventCategory fn={fn} title="Events for Seniors" appState={this.state.eventData.seniors} />
+				<EventCategory fn={fn} title="Events for Newcomers to Canada" appState={this.state.eventData.newcomers} />
+				<EventCategory fn={fn} title="Events for Art Lovers" appState={this.state.eventData.arts} />
+			</React.Fragment>
+			)}
+              {/* <EventPage fn={fn} appState={this.state.data} /> */}
             </main>
             {/* This main will be switched out for EventPage module */}
           </div>
