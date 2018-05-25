@@ -39,6 +39,10 @@ a {
     margin: 0 auto;
 }
 
+main h4, aside h4 {
+    font-family: $mainFont;
+}
+
 main .EventCategory {
     width: 70%;
     margin-right: 5%;
@@ -106,7 +110,7 @@ aside {
         h4 {
             margin-top: 0;
             margin-bottom: 0;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
         }
         a {
             padding: 0 10px;
