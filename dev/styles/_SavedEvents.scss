@@ -1,0 +1,61 @@
+.SavedEvents {
+    border: 2px solid green;
+    padding: 15px;
+    > * {
+        float: left;
+    }
+    .userImg {
+        min-width: 50px;
+        width: 10%;
+        max-width: 150px;
+        margin-right: 15px;
+        img {
+            border-radius: 50%;
+        }
+    }
+    .title {
+        width: calc(90% - 15px);
+        h2 {
+            margin: 7px 0;
+        }
+    }
+    .eventListContainer {
+        position: relative;
+        width: calc(90% - 15px);
+        border: 1px solid #000;
+        ul {
+            border: 1px solid tomato;
+            width: 100%;
+            padding: 10px 40px;
+        }
+        li {
+            border: 1px solid #000;
+            width: 25%;
+        }
+    }
+    .buttonLeft, 
+    .buttonRight {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .buttonLeft {
+        left: 0;
+    }
+    .buttonRight {
+        right: 0;
+    }
+    .buttonBottom {
+        display: none;
+    }
+    @media (max-width: 500px) {
+        .buttonLeft, 
+        .buttonRight {
+            display: none;
+        }
+        .buttonBottom {
+            display: block;
+        }
+
+    }
+}//end of SavedEvents styles
