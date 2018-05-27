@@ -11,26 +11,10 @@ class EventCategory extends React.Component {
 
         this.state = {
             loadNumber: 3
-            // title: ''
         }
 
         this.loadMore = this.loadMore.bind(this);
-        // this.componentDidMount = this.componentDidMount.bind(this)
     }
-
-    // componentDidMount() {
-        
-        
-    //     if (this.props.appState !== null) {
-    //         const title = this.props.appState[0].title
-
-    //         this.setState({
-    //             title: title
-    //         })
-
-    //     }
-    
-    // }
 
     loadMore() {
         
@@ -53,7 +37,7 @@ class EventCategory extends React.Component {
                     
                         <p dangerouslySetInnerHTML={{ __html: event.description }}></p>
 
-                        <ul>
+                        <ul className="links">
                             <li onClick={() => this.props.fn.eventPageChange(event)}>
                                 <Link to={`/events/${event.id}`}><i className="fas fa-info-circle"></i> Event Info</Link>
                                 {/* <Route path="/events" component={EventPage} /> */}
