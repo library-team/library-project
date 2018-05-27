@@ -45,15 +45,16 @@ class EventCategory extends React.Component {
         <section className="EventCategory">
             <h2>{this.props.title}</h2>
             {this.props.events.slice(0,this.state.loadNumber).map((event) => {
-                
+
                 return (
                 <div className="event" key={event.id}>
                     <h3>{event.title}</h3>
                     <h4>{event.date}</h4>
+                    
                         <p dangerouslySetInnerHTML={{ __html: event.description }}></p>
 
                         <ul>
-                            <li>
+                            <li onClick={() => this.props.fn.eventPageChange(event)}>
                                 <Link to={`/events/${event.id}`}><i className="fas fa-info-circle"></i> Event Info</Link>
                                 {/* <Route path="/events" component={EventPage} /> */}
                             </li>
