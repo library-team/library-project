@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 const SavedEvents = ({fn, user}) => {
-    console.log('from saved events', user);
+    // console.log('from saved events', user);
     let savedEventsArray = [];
     let slicedEventsArray = [];
     if (user.savedEvents) {
@@ -28,7 +28,7 @@ const SavedEvents = ({fn, user}) => {
                 <button className="buttonLeft" onClick={() => fn.handleButtonLeft(savedEventsArray.length)}><i className="fas fa-angle-left"></i></button>
                 <button className="buttonRight" onClick={() => fn.handleButtonRight(savedEventsArray.length)}><i className="fas fa-angle-right"></i></button>
                 <ul className="clearfix">
-                    {(user.savedEvents) 
+                    {(user.savedEvents)
                     ? slicedEventsArray.map((event) => {
                         return (
                         <li key={event.dbKey}>
@@ -42,11 +42,11 @@ const SavedEvents = ({fn, user}) => {
                             <button onClick={() => fn.removeEvent(event.dbKey)}><i className="fas fa-times-circle"></i>Delete Event</button>
                         </li>
                         )
-                    }) 
+                    })
                     : (<li>
                         <p>Click on an event below to add your event here.</p>
                         </li>)
-                    }   
+                    }
                 </ul>
                 <button className="buttonBottom"><i className="fas fa-angle-down"></i></button>
             </div>
