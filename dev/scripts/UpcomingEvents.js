@@ -32,7 +32,10 @@ class UpcomingEvents extends React.Component {
                         <div className="event" key={i}>
                             <h3>{event.title}</h3>
                             <h4>{event.date}</h4>
-                            <a href="#"><i className="fas fa-info-circle"></i> Event Info</a>
+                            <li onClick={() => this.props.fn.eventPageChange(event)}>
+                                <Link to={`/events/${event.id}`}><i className="fas fa-info-circle"></i> Event Info</Link>
+                                {/* <Route path="/events" component={EventPage} /> */}
+                            </li>
                         </div>
                     )
                 })}
