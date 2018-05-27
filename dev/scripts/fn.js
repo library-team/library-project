@@ -102,7 +102,7 @@ fn.saveEvent = function (e, event) {
 
 fn.handleModalClick = function() {
 	this.setState({
-		showModal: false, 
+		showModal: false,
 		message: ''
 	})
 }//end of modalClick
@@ -111,11 +111,14 @@ fn.sliceSavedEvents = function(array) {
 	let i = this.state.savedStart;
 	let initialSlice = array.slice(i, i + 4);
 	let diff = 4 - initialSlice.length;
-	if (diff > 0) {
+
+	if (array.length < 4) {
+		return initialSlice.concat(array.slice(0,i));
+	} else if (diff > 0) {
 		let secondSlice = array.slice(0, diff);
 		return initialSlice.concat(secondSlice);
 	} else {
-		return initialSlice; 
+		return initialSlice;
 	}
 }
 fn.handleButtonLeft = function(numberSaved) {
@@ -315,7 +318,7 @@ fn.eventPageChange = function (event) {
 	this.setState({
 		eventPageData: event
 	})
-	
+
 }
 
 
