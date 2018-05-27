@@ -258,6 +258,13 @@ fn.filterCategoriesByDate = function (categories) {
 
 }
 
+fn.eventPageChange = function (event) {
+	this.setState({
+		eventPageData: event
+	})
+	
+}
+
 
 
 
