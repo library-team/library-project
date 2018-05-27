@@ -48,6 +48,7 @@ class App extends React.Component {
 	//   data: null,
 	  user: null,
 	eventData: null,
+	eventPageData: null,
 	dbRefUser: null
     }
 
@@ -107,7 +108,7 @@ class App extends React.Component {
 			</header>
 			<div className="wrapper">
 
-				<Route path="/events/:event_id" component={EventPage} />
+						<Route path="/events/:event_id" component={(parentProps) => <EventPage parentProps={parentProps} eventData={this.state.eventData} eventPageData={this.state.eventPageData}/>} />
 
 				<aside>
 				{(this.state.eventData)
