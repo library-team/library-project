@@ -49,7 +49,9 @@ class App extends React.Component {
 	  user: null,
 	eventData: null,
 	eventPageData: null,
-	dbRefUser: null
+	dbRefUser: null, 
+	showModal: false, 
+	message: 'hi'
     }
 
     //Bind all the 'this' of all functions in fn to App.
@@ -58,7 +60,7 @@ class App extends React.Component {
     func = func.bind(this);
     fn[functionName] = func;
     }
-    fn.logout();
+    // fn.logout();
   }
 
   componentDidMount() {
@@ -101,14 +103,18 @@ class App extends React.Component {
     render() {
 		return (
 		<Router>
-			<div>
+			<React.Fragment>
 			<header>
 				<Header fn={fn}  appState={this.state} />
-				{/* {(this.state.user) &&  <SavedEvents fn={fn} appState={this.state.eventData.saved} />} */}
+				{(this.state.user) &&  <SavedEvents fn={fn} user={this.state.user} />}
 			</header>
 			<div className="wrapper">
-
-						<Route path="/events/:event_id" component={(parentProps) => <EventPage parentProps={parentProps} eventData={this.state.eventData} eventPageData={this.state.eventPageData}/>} />
+					<div className={`modal ${(this.state.showModal) ? 'show' : ''}`} onClick={fn.handleModalClick}>
+					<div className='modalContent'>
+						<h3>{this.state.message}</h3>
+					</div>
+				</div>
+				<Route path="/events/:event_id" component={(parentProps) => <EventPage parentProps={parentProps} eventData={this.state.eventData} eventPageData={this.state.eventPageData}/>} />
 
 				<aside>
 				{(this.state.eventData)
@@ -134,7 +140,7 @@ class App extends React.Component {
 				</main>
 				{/* This main will be switched out for EventPage module */}
 			</div>
-			</div>
+			</React.Fragment>
 		</Router>
       )
     }

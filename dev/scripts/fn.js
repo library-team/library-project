@@ -80,21 +80,27 @@ fn.handleAuthChange = function (user) {
 }
 
 fn.saveEvent = function (e, event) {
-e.preventDefault();
-console.log(event);
+	e.preventDefault();
+	console.log(event);
 
-// if (this.state.user) {
-// 	const dbRefSaved =  firebase.database().ref('users/' + this.state.user.id + '/savedEvents');
+	//If user is logged in, push event to that user's savedEvents node
+	if (this.state.user) {
+		const dbRefSaved =  firebase.database().ref('users/' + this.state.user.id + '/savedEvents');
+		dbRefSaved.push(event);
+	} else {
+		//If user is not logged in prompt them to log in
+		this.setState({
+			showModal: true,
+			message: 'Please login to save your event.'
+		})
+	}
+} //end of saveEvent
 
-// 	dbRefSaved.push(event);
-
-// }
-
-//If user is logged in, push event to that user's savedEvents node
-
-
-//If user is not logged in prompt them to log in
-
+fn.handleModalClick = function() {
+	this.setState({
+		showModal: false, 
+		message: ''
+	})
 }
 
 
