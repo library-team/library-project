@@ -51,7 +51,8 @@ class App extends React.Component {
 	eventPageData: null,
 	dbRefUser: null, 
 	showModal: false, 
-	message: 'hi'
+	message: 'hi', 
+	savedStart: 0
     }
 
     //Bind all the 'this' of all functions in fn to App.

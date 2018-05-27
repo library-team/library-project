@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
+import { runInThisContext } from 'vm';
 
 const fn = {};
 
@@ -87,6 +88,9 @@ fn.saveEvent = function (e, event) {
 	if (this.state.user) {
 		const dbRefSaved =  firebase.database().ref('users/' + this.state.user.id + '/savedEvents');
 		dbRefSaved.push(event);
+		this.setState({
+			savedStart: 0
+		})
 	} else {
 		//If user is not logged in prompt them to log in
 		this.setState({
@@ -101,6 +105,49 @@ fn.handleModalClick = function() {
 		showModal: false, 
 		message: ''
 	})
+}//end of modalClick
+
+fn.sliceSavedEvents = function(array) {
+	let i = this.state.savedStart;
+	let initialSlice = array.slice(i, i + 4);
+	let diff = 4 - initialSlice.length;
+	if (diff > 0) {
+		let secondSlice = array.slice(0, diff);
+		return initialSlice.concat(secondSlice);
+	} else {
+		return initialSlice; 
+	}
+}
+fn.handleButtonLeft = function(numberSaved) {
+	let initialStartIndex = this.state.savedStart;
+	let currentIndex;
+	if(initialStartIndex === 0) {
+		currentIndex = numberSaved - 1;
+	} else {
+		currentIndex = initialStartIndex - 1;
+	}
+	this.setState({
+		savedStart: currentIndex
+	})
+}
+fn.handleButtonRight = function (numberSaved) {
+	let initialStartIndex = this.state.savedStart;
+	let currentIndex;
+	if (numberSaved - 1 === initialStartIndex) {
+		currentIndex = 0;
+	} else {
+		currentIndex = initialStartIndex + 1;
+	}
+	this.setState({
+		savedStart: currentIndex
+	})
+}
+
+fn.removeEvent = function(dbKey) {
+	let userId = this.state.user.id;
+	let dbRefEvent = firebase.database().ref('users/'+ userId + '/savedEvents/' + dbKey);
+	dbRefEvent.remove();
+
 }
 
 

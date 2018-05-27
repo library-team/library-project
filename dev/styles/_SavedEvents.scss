@@ -4,6 +4,9 @@
     > * {
         float: left;
     }
+    h4 {
+        font-size: 1.4rem;
+    }
     .userImg {
         min-width: 50px;
         width: 10%;
@@ -30,7 +33,11 @@
         }
         li {
             border: 1px solid #000;
-            width: 25%;
+            min-height: 270px;
+            width: calc((100% - 40px) / 4);
+            float: left;
+            padding: 10px;
+            margin: 0 5px;
         }
     }
     .buttonLeft, 
@@ -48,7 +55,21 @@
     .buttonBottom {
         display: none;
     }
-    @media (max-width: 500px) {
+    @media (max-width: 950px) {
+        .eventListContainer {
+            li {
+                min-height: 350px;
+            }
+        }
+    }
+    @media (max-width: 800px) {
+        .eventListContainer {
+            li {
+                float: none;
+                min-height: auto;
+                width: 100%;
+            }
+        }
         .buttonLeft, 
         .buttonRight {
             display: none;
@@ -56,6 +77,8 @@
         .buttonBottom {
             display: block;
         }
+    }
+    @media (max-width: 500px) {
 
     }
 }//end of SavedEvents styles
