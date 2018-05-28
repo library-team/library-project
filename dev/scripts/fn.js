@@ -160,7 +160,14 @@ fn.displayDropdown = function() {
 	console.log('clicked hamburger');
 }
 
-
+fn.handleNavClick = function(e, id) {
+	e.preventDefault();
+	setTimeout(() => {
+		document.querySelector('#'+ id).scrollIntoView({
+			behavior: 'smooth'
+		});
+	}, 100);
+}
 
 
 
