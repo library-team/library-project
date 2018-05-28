@@ -35,6 +35,12 @@ img {
 a {
     text-decoration: none;
 }
+
+
+main.hide, aside.hide {
+	display: none;
+}
+
 .modalContent {
     position: absolute;
     top: 50%;

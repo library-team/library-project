@@ -79,10 +79,10 @@
 		font-size: 2rem;
 		background: $darkBlue;
 		border-radius: 6px;
-		box-shadow: 2px 2px 3px $darkBlue;
-		transition: box-shadow 0.1s, transform 0.1s;
+		box-shadow: 2px 2px 2px $darkBlue;
+		transition: box-shadow 0.1s transform 0.1s;
 		&:active {
-			box-shadow: 1px 1px 2px $darkBlue;
+			box-shadow: 1px 1px 1px $darkBlue;
 			transform: translate(1px, calc(-50% + 1px)) ;
 		}
 	}
@@ -107,8 +107,15 @@
 		left: 50%;
 		transform: translate(-50%, 50%);
 		padding: 10px 20px ;
+
 		&:active {
 			transform: translate(calc(-50% + 1px), calc(50% + 1px)) ;
+		}
+		&.mobileExpand {
+			position: fixed;
+			transform:  translate(-50%, 0) rotate(180deg);
+			background: $red;
+			transition: transform 0.4s;
 		}
 	}
 	// @media (max-width: 1300px) {
@@ -173,9 +180,7 @@
         }
         .buttonBottom {
 			display: block;
-			&.mobileExpand {
-				transform:  translate(calc(-50% + 1px), calc(50% + 1px)) rotate(180deg)  ;
-			}
+
         }
     }
     @media (max-width: 500px) {

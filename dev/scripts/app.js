@@ -53,8 +53,8 @@ class App extends React.Component {
 	dbRefUser: null,
 	showModal: false,
 	message: 'hi',
-	savedStart: 0, 
-	displayHamMenu: false, 
+	savedStart: 0,
+	displayHamMenu: false,
 	savedMobileExpand: false
     }
 
@@ -123,11 +123,11 @@ class App extends React.Component {
 				</div>
 				<Route path="/events/:event_id" component={(parentProps) => <EventPage fn={fn} parentProps={parentProps} eventData={this.state.eventData} eventPageData={this.state.eventPageData}/>} />
 
-				<aside>
+				<aside className={this.state.savedMobileExpand ? 'hide' : null }  >
 				{(this.state.eventData)
 					&& <UpcomingEvents fn={fn} appState={this.state.eventData.upcoming} />}
 				</aside>
-				<main>
+				<main className={this.state.savedMobileExpand ? 'hide' : null } >
 					{(this.state.eventData)
 					&& (
 					 <React.Fragment>
