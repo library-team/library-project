@@ -363,8 +363,10 @@ fn.getGoogleTime = function (event) {
 	} else {
 		endDate = startDate
 	}
-
-	if (event.endtime.includes('P')) {
+	if (!event.endtime) {
+		endTime = "N/A"
+	}
+	else if (event.endtime.includes('P')) {
 		endTime = String(parseInt(event.endtime.substring(0, event.endtime.indexOf(':'))) + 16) + event.endtime.substring(event.endtime.indexOf(':') + 1, event.endtime.indexOf(':') + 3)
 	} else {
 		endTime = String(parseInt(event.endtime.substring(0, event.endtime.indexOf(':'))) + 4) + event.endtime.substring(event.endtime.indexOf(':') + 1, event.endtime.indexOf(':') + 3)

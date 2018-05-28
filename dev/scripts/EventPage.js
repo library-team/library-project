@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    Route, Link
+} from 'react-router-dom';
 
 class EventPage extends React.Component {
     constructor(props) {
@@ -8,10 +12,9 @@ class EventPage extends React.Component {
 
     componentDidMount() {
 
-        document.querySelector('#event').scrollIntoView({
+        document.querySelector('#event-top').scrollIntoView({
             behavior: 'smooth'
-        });
-
+        })
     }
 
     // this.props.eventPageData.eventtypes
@@ -59,6 +62,8 @@ class EventPage extends React.Component {
         console.log(this.props.eventPageData);
         
         return this.props.eventPageData ? (
+            <React.Fragment>
+            <Link className="button button--back" id="event-top" to="/"><i class="far fa-caret-square-left"></i> Back to Main Page</Link>
             <main className="EventPage" id="event">
                 <h2>{this.props.eventPageData.title}</h2>
                 <img src={this.getImage(this.props.eventPageData)} alt="Image!"/>
@@ -74,6 +79,7 @@ class EventPage extends React.Component {
                     <li><a href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=${this.props.fn.getGoogleTime(this.props.eventPageData)}&text=${this.props.eventPageData.title}&location=Toronto+Public+Library+${this.props.eventPageData.library}&details=${this.props.eventPageData.description}`}><i className="fas fa-calendar-plus"></i> Add to Calendar</a></li>
                 </ul>
             </main>
+            </React.Fragment>
         ) : <div></div>
     }
 }
