@@ -328,59 +328,41 @@ fn.eventPageChange = function (event) {
 
 }
 
-// fn.getGoogleTime = function (startTime, endTime) {
-
-// 	const googleStartDate = startTime.substring(0, 8)
-
-// 	const googleStartTime = parseInt(startTime.substring(8, 12)) + 400
-
-// 	const googleDate = googleStartDate + 'T' + googleStartTime + '00Z'
-
-// 	let googleEndTime = ''
-
-// 	if (endTime.includes('P')) {
-// 		googleEndTime = String(parseInt(endTime.substring(0, endTime.indexOf(':'))) + 16) + endTime.substring(endTime.indexOf(':') + 1, endTime.indexOf(':') + 3)
-// 	} else {
-// 		googleEndTime = String(parseInt(endTime.substring(0, endTime.indexOf(':'))) + 4) + endTime.substring(endTime.indexOf(':') + 1, endTime.indexOf(':') + 3)
-// 	}
-
-// 	const googleEndDate = googleStartDate + 'T' + googleEndTime + '00Z'
-
-// 	const fullDate = googleDate + '/' + googleEndDate;
-
-// 	return fullDate
-
-// }
-
 fn.getGoogleTime = function (event) {
 
-	const googleStartDate = event.date2.substring(0, 8)
+	const startDate = event.date2.substring(0, 8)
 
-	const googleStartTime = parseInt(event.date2.substring(8, 12)) + 400
+	let startTime = parseInt(event.date2.substring(8, 12)) + 400
 
-	const googleDate = googleStartDate + 'T' + googleStartTime + '00Z'
-
-	let googleEndTime = ''
-
-	let EndDate = ''
-
-	if (event.endtime.includes('P')) {
-		googleEndTime = String(parseInt(event.endtime.substring(0, event.endtime.indexOf(':'))) + 16) + event.endtime.substring(event.endtime.indexOf(':') + 1, event.endtime.indexOf(':') + 3)
+	if (startTime.toString().length < 4) {
+		startTime = '0' + startTime.toString()
 	} else {
-		googleEndTime = String(parseInt(event.endtime.substring(0, event.endtime.indexOf(':'))) + 4) + event.endtime.substring(event.endtime.indexOf(':') + 1, event.endtime.indexOf(':') + 3)
+		startTime = startTime.toString()
 	}
+
+	const googleStartDate = startDate + 'T' + startTime + '00Z'
+
+	let endDate = ''
+	
+	let endTime = ''
 
 	if (event.enddate1) {
-		EndDate = event.enddate1.replace(/\//g, '')
+		endDate = event.enddate1.replace(/\//g, '')
 	} else {
-		EndDate = googleDate
+		endDate = startDate
 	}
 
-	const googleEndDate = EndDate + 'T' + googleEndTime + '00Z'
+	if (event.endtime.includes('P')) {
+		endTime = String(parseInt(event.endtime.substring(0, event.endtime.indexOf(':'))) + 16) + event.endtime.substring(event.endtime.indexOf(':') + 1, event.endtime.indexOf(':') + 3)
+	} else {
+		endTime = String(parseInt(event.endtime.substring(0, event.endtime.indexOf(':'))) + 4) + event.endtime.substring(event.endtime.indexOf(':') + 1, event.endtime.indexOf(':') + 3)
+	}
 
-	const fullDate = googleDate + '/' + googleEndDate;
+	const googleEndDate = endDate + 'T' + endTime + '00Z'
 
-	return fullDate
+	const googleFullDate = googleStartDate + '/' + googleEndDate;
+
+	return googleFullDate
 
 }
 
