@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    Route, Link
+} from 'react-router-dom';
 
 const Header = (props) => {
     return (
@@ -12,11 +16,26 @@ const Header = (props) => {
             <button onClick={() => props.fn.displayDropdown()} className='dropdownBtn hide'><i className="fas fa-bars"></i></button>
             <nav className={`mainNav ${(props.appState.displayHamMenu) ? '' : 'mobileHide'}`}>
                 <ul className={'dropdownContent clearfix'} onClick={() => props.fn.displayDropdown()}>
-                    <li><a href="#children">Childrens Events</a></li>
-                    <li><a href="#students">Student Events</a></li>
-                    <li><a href="#seniors">Seniors Events</a></li>
-                    <li><a href="#newcomers">New Canadians Events</a></li>
-                    <li><a href="#arts">Art Events</a></li>
+                    <li onClick={(e) => props.fn.handleNavClick(e, "children")
+                    }>
+                        <Link to="/#children" >Childrens Events</Link>
+                    </li>
+                    <li onClick={(e) => props.fn.handleNavClick(e, "students")
+                    }>
+                        <Link to="/#students">Student Events</Link>
+                    </li>
+                    <li onClick={(e) => props.fn.handleNavClick(e, "seniors")
+                    }>
+                        <Link to="/#seniors">Seniors Events</Link>
+                    </li>
+                    <li onClick={(e) => props.fn.handleNavClick(e, "newcomers")
+                    }>
+                        <Link to="/#newcomers">New Canadians Events</Link>
+                    </li>
+                    <li onClick={(e) => props.fn.handleNavClick(e, "arts")
+                    }>
+                        <Link to="/#arts">Art Events</Link>
+                    </li>
                 </ul>
             </nav>
             <div className="login">
