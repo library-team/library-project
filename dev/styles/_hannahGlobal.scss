@@ -6,14 +6,11 @@
     position: relative;
     .headerTitle {
         width: 30%;
-        border: 1px solid gold;
         float: left;
         position: relative;
         .logo{
             width: 15%;
-            // display: inline-block;
             position: absolute;
-            // left: 0;
             top: 50%;
             transform: translateY(-50%);
             img {
@@ -21,26 +18,13 @@
             }
         }
         h1 {
-            // display: inline-block;
             float: left;
             margin-left: 15%;
-            //position: absolute;
-            //margin: 0;
-            // left: 20%;
-            // top: 60%;
-            // transform: translateY(50%);
         }
     }
     .mainNav {
-        border: 2px solid pink;
         margin-top: 37px;
         float: left;
-        // .dropdownBtn {
-        //     font-size: 4rem;
-        //     border: none; 
-        //     background: $darkBlue;
-        //     color: #fff;
-        // }
         ul {
             padding: 0;
             list-style-type: none;
@@ -59,7 +43,6 @@
         }
     }
     .login {
-        //border: 2px solid orange;
         position: absolute;
         right: 1%;
         top: 50%;
@@ -119,6 +102,44 @@
             float: right;
             margin-right: 17%;
             transform: translateY(50%);
+        }
+        .mainNav {
+            position: absolute;
+            z-index: 20;
+            right: 17%;
+            top: 100%;
+            background: $darkBlue;
+        }
+    }
+    @media (max-width: 630px) {
+        .headerTitle {
+            width: 40%;
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+        .hide {
+            margin-right: 20%;
+            transform: translateY(30%);
+        }
+        .mainNav {
+            right: 20%;
+            top: 100%;
+        }
+    }
+    @media (max-width: 535px) {
+        .headerTitle {
+            float: none;
+            width: 100%;
+        }
+        .hide {
+            float: none;
+            transform: translateY(0);
+            margin: 0 auto;
+        }
+        .mainNav {
+            right: 50%;
+            transform: translateX(50%);
         }
     }
 }

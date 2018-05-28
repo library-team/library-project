@@ -153,7 +153,12 @@ fn.removeEvent = function(dbKey) {
 
 }
 
-
+fn.displayDropdown = function() {
+	this.setState({
+		displayHamMenu: !this.state.displayHamMenu
+	})
+	console.log('clicked hamburger');
+}
 
 
 
