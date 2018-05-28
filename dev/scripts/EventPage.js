@@ -6,6 +6,14 @@ class EventPage extends React.Component {
 
     }
 
+    componentDidMount() {
+
+        document.querySelector('#event').scrollIntoView({
+            behavior: 'smooth'
+        });
+        
+    }
+
     // this.props.eventPageData.eventtypes
 
     normalizeEventType(eventTypeString) {
@@ -51,7 +59,7 @@ class EventPage extends React.Component {
         console.log(this.props.eventPageData);
         
         return this.props.eventPageData ? (
-            <main className="EventPage">
+            <main className="EventPage" id="event">
                 <h2>{this.props.eventPageData.title}</h2>
                 <img src={this.getImage(this.props.eventPageData)} alt="Image!"/>
                 <ul>
