@@ -36,6 +36,15 @@ class EventPage extends React.Component {
         
         return imageLink
     }
+
+    // checkEndDate(event) {
+
+    //     if (event.enddate) {
+    //         return event.date + ' to ' + event.enddate
+    //     } else {
+    //         return event.date
+    //     }
+    // }
     
     render() {
 
@@ -47,7 +56,8 @@ class EventPage extends React.Component {
                 <img src={this.getImage(this.props.eventPageData)} alt="Image!"/>
                 <ul>
                     <li>{`Branch: ${this.props.eventPageData.library}`}</li>
-                    <li>{this.props.eventPageData.date}</li>
+                    {/* <li>{this.checkEndDate()
+                        props.eventPageData.date}</li> */}
                     <li>{`${this.props.eventPageData.time} to ${this.props.eventPageData.endtime}`}</li>
                     <li>{this.normalizeEventType(this.props.eventPageData.eventtypes)}</li>
                     <li className="EventPage__description" dangerouslySetInnerHTML={{ __html: this.props.eventPageData.description }}></li>
