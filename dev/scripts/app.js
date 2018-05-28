@@ -90,12 +90,15 @@ class App extends React.Component {
       .then((res) => {
 		const data = res.data;
 
+		console.log(data);
+
+
 		const filteredData =  fn.filterCategoriesByDate ( fn.filterEachEventCategory(data) );
 
 		// console.log(`All categories filtered`, filteredData  );
 
 		dbRef.set(filteredData);
-
+		console.log('filtered data', filteredData)
       }); //End of THEN
 
 

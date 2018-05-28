@@ -299,12 +299,17 @@ fn.filterEachEventCategory = function (data) {
 }
 
 
-fn.filterCategoriesByDate = function (categories) {
+
+fn.todayDate = function () {
 	const dateObj = new Date;
-	const today = `${dateObj.getFullYear()}/${
+	return `${dateObj.getFullYear()}/${
 		//If the month + 1 is less than 10 add a zero
 		(dateObj.getMonth()+1 < 10  ) ? '0' + (dateObj.getMonth()+1)  : dateObj.getMonth()+1
 	}/${  dateObj.getDate() < 10  ?  '0' + dateObj.getDate()  :   dateObj.getDate()}`;
+}
+
+fn.filterCategoriesByDate = function (categories) {
+	const today = fn.todayDate();
 	for (const category in categories) {
 		let catArr = categories[category];
 		catArr = fn.sortByDate(catArr);
@@ -314,6 +319,8 @@ fn.filterCategoriesByDate = function (categories) {
 
 }
 
+
+
 fn.eventPageChange = function (event) {
 	this.setState({
 		eventPageData: event
@@ -321,27 +328,41 @@ fn.eventPageChange = function (event) {
 
 }
 
-fn.getGoogleTime = function (startTime, endTime) {
+fn.getGoogleTime = function (event) {
 
-	const googleStartDate = startTime.substring(0, 8)
+	const startDate = event.date2.substring(0, 8)
 
-	const googleStartTime = parseInt(startTime.substring(8, 12)) + 400
+	let startTime = parseInt(event.date2.substring(8, 12)) + 400
 
-	const googleDate = googleStartDate + 'T' + googleStartTime + '00Z'
-
-	let googleEndTime = ''
-
-	if (endTime.includes('P')) {
-		googleEndTime = String(parseInt(endTime.substring(0, endTime.indexOf(':'))) + 16) + endTime.substring(endTime.indexOf(':') + 1, endTime.indexOf(':') + 3)
+	if (startTime.toString().length < 4) {
+		startTime = '0' + startTime.toString()
 	} else {
-		googleEndTime = String(parseInt(endTime.substring(0, endTime.indexOf(':'))) + 4) + endTime.substring(endTime.indexOf(':') + 1, endTime.indexOf(':') + 3)
+		startTime = startTime.toString()
 	}
 
-	const googleEndDate = googleStartDate + 'T' + googleEndTime + '00Z'
+	const googleStartDate = startDate + 'T' + startTime + '00Z'
 
-	const fullDate = googleDate + '/' + googleEndDate;
+	let endDate = ''
+	
+	let endTime = ''
 
-	return fullDate
+	if (event.enddate1) {
+		endDate = event.enddate1.replace(/\//g, '')
+	} else {
+		endDate = startDate
+	}
+
+	if (event.endtime.includes('P')) {
+		endTime = String(parseInt(event.endtime.substring(0, event.endtime.indexOf(':'))) + 16) + event.endtime.substring(event.endtime.indexOf(':') + 1, event.endtime.indexOf(':') + 3)
+	} else {
+		endTime = String(parseInt(event.endtime.substring(0, event.endtime.indexOf(':'))) + 4) + event.endtime.substring(event.endtime.indexOf(':') + 1, event.endtime.indexOf(':') + 3)
+	}
+
+	const googleEndDate = endDate + 'T' + endTime + '00Z'
+
+	const googleFullDate = googleStartDate + '/' + googleEndDate;
+
+	return googleFullDate
 
 }
 
