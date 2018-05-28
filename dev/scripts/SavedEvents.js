@@ -24,7 +24,7 @@ const SavedEvents = ({fn, user}) => {
             <div className="title">
                 <h2>{user.name.split(' ', 1)}'s Saved Events</h2>
             </div>
-            <div className="eventListContainer">
+            <div className={`eventListContainer ${(fn.thisApp().state.savedMobileExpand === true ) ? 'mobileExpand' : '' }`}>
                 <button className="buttonLeft" onClick={() => fn.handleButtonLeft(savedEventsArray.length)}><i className="fas fa-angle-left"></i></button>
                 <button className="buttonRight" onClick={() => fn.handleButtonRight(savedEventsArray.length)}><i className="fas fa-angle-right"></i></button>
                 <ul className="clearfix">
@@ -32,10 +32,10 @@ const SavedEvents = ({fn, user}) => {
                     ? slicedEventsArray.map((event) => {
                         return (
                         <li key={event.dbKey}>
-                            <h4>{event.title}</h4>
+                            <h4 className="eventTitle" >{event.title}</h4>
                             <h4>{event.date}</h4>
-                            <h4>Time: {event.time}</h4>
-                            <h4>Branch: {event.library}</h4>
+                            <h4>{event.time}</h4>
+                            <h4>{event.library}</h4>
                             <Link to={`/events/${event.id}`}
                             onClick={() => fn.eventPageChange(event)}
                             ><i className="fas fa-info-circle"></i> Event Info</Link>
@@ -49,8 +49,13 @@ const SavedEvents = ({fn, user}) => {
                         </li>)
                     }
                 </ul>
-                <button className="buttonBottom"><i className="fas fa-angle-down"></i></button>
+
             </div>
+			<button className={`buttonBottom ${(fn.thisApp().state.savedMobileExpand === true ) ? 'mobileExpand' : '' }`}
+				onClick={() => {
+					fn.thisApp().setState({ savedMobileExpand: !fn.thisApp().state.savedMobileExpand });
+				} }
+			><i className="fas fa-angle-down"></i></button>
         </section>
     )
 }
