@@ -1,5 +1,6 @@
 .SavedEvents {
-    border: 2px solid green;
+	// border: 2px solid green;
+
     padding: 15px;
     > * {
         float: left;
@@ -11,13 +12,15 @@
         min-width: 50px;
         width: 10%;
         max-width: 150px;
-        margin-right: 15px;
+        margin-right: -20px;
         img {
-            border-radius: 50%;
+			border-radius: 50%;
+			display: block;
         }
     }
     .title {
-        width: calc(90% - 15px);
+		width: calc(90% - 15px);
+		padding-left: 40px;
         h2 {
             margin: 7px 0;
         }
@@ -25,26 +28,58 @@
     .eventListContainer {
         position: relative;
         width: calc(90% - 15px);
-        border: 1px solid #000;
+        // border: 1px solid #000;
         ul {
-            border: 1px solid tomato;
             width: 100%;
             padding: 10px 40px;
         }
         li {
-            border: 1px solid #000;
+			// border: 1px solid #000;
+			background: $mediumBlue;
+			border-radius: 20px;
             min-height: 270px;
             width: calc((100% - 40px) / 4);
             float: left;
             padding: 10px;
-            margin: 0 5px;
-        }
+			margin: 0 5px;
+			box-shadow: 2px 2px 3px $darkBlue;
+		}
+		a {
+			display: block;
+			padding: 5px;
+		}
+		.deleteEvent { //Delete Event Button
+			background: none;
+			border: none;
+			padding: 5px;
+			transition: background, 0.5s;
+			&:hover {
+				background: $red;
+			}
+		}
+
+
     }
-    .buttonLeft, 
+    .buttonLeft,
     .buttonRight {
+		border: none;
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
+		transform: translateY(-50%);
+		padding: 10px;
+
+		color: white;
+		font-size: 2rem;
+		background: $darkBlue;
+		border-radius: 6px;
+		box-shadow: 2px 2px 3px $darkBlue;
+		transition: box-shadow 0.1s, transform 0.1s;
+		&:active {
+			box-shadow: 1px 1px 2px $darkBlue;
+			transform: translate(1px, calc(-50% + 1px)) ;
+		}
+
+
     }
     .buttonLeft {
         left: 0;
@@ -70,7 +105,7 @@
                 width: 100%;
             }
         }
-        .buttonLeft, 
+        .buttonLeft,
         .buttonRight {
             display: none;
         }
