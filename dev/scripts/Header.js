@@ -1,10 +1,6 @@
 import React from 'react';
 
 const Header = (props) => {
-    // const displayDropdown = function() {
-    //     let elementToShow = document.querySelector('dropdownContent').classList;
-    //     elementToShow.add('display');
-    // }
     return (
         <section className="Header clearfix">
             <div className="headerTitle clearfix">
@@ -13,9 +9,9 @@ const Header = (props) => {
                 </div>
                 <h1>Library Events</h1>
             </div> 
-            <button  /*onClick={displayDropdown} */ className='dropdownBtn hide'><i className="fas fa-bars"></i></button>
-            <nav className="mainNav mobileHide">
-                <ul className="dropdownContent clearfix">
+            <button onClick={() => props.fn.displayDropdown()} className='dropdownBtn hide'><i className="fas fa-bars"></i></button>
+            <nav className={`mainNav ${(props.appState.displayHamMenu) ? '' : 'mobileHide'}`}>
+                <ul className={'dropdownContent clearfix'} onClick={() => props.fn.displayDropdown()}>
                     <li><a href="#children">Childrens Events</a></li>
                     <li><a href="#students">Student Events</a></li>
                     <li><a href="#seniors">Seniors Events</a></li>
