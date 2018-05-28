@@ -53,7 +53,9 @@ class App extends React.Component {
 	dbRefUser: null,
 	showModal: false,
 	message: 'hi',
-	savedStart: 0
+	savedStart: 0, 
+	displayHamMenu: false, 
+	savedMobileExpand: false
     }
 
     //Bind all the 'this' of all functions in fn to App.
@@ -113,7 +115,7 @@ class App extends React.Component {
 				<Header fn={fn}  appState={this.state} />
 				{(this.state.user) &&  <SavedEvents fn={fn} user={this.state.user} />}
 			</header>
-			<div className="wrapper">
+			<div className="wrapper clearfix">
 					<div className={`modal ${(this.state.showModal) ? 'show' : ''}`} onClick={fn.handleModalClick}>
 					<div className='modalContent'>
 						<h3>{this.state.message}</h3>

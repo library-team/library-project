@@ -11,7 +11,7 @@ class EventPage extends React.Component {
         document.querySelector('#event').scrollIntoView({
             behavior: 'smooth'
         });
-        
+
     }
 
     // this.props.eventPageData.eventtypes
@@ -67,10 +67,10 @@ class EventPage extends React.Component {
                     <li>{this.checkEndDate(this.props.eventPageData)}</li>
                     <li>{`${this.props.eventPageData.time} to ${this.props.eventPageData.endtime}`}</li>
                     <li>{this.normalizeEventType(this.props.eventPageData.eventtypes)}</li>
-                    <li className="EventPage__description" dangerouslySetInnerHTML={{ __html: this.props.eventPageData.description }}></li>
                 </ul>
+                <p className="EventPage__description" dangerouslySetInnerHTML={{ __html: this.props.eventPageData.description }}></p>
                 <ul className="links">
-                    {/* <li><a href="#" onClick={(e) => { this.props.fn.saveEvent(e, event) }}><i className="fas fa-bookmark"></i> Save Event</a></li> */}
+                    <li><a href="#" onClick={(e) => { this.props.fn.saveEvent(e, this.props.eventPageData) }}><i className="fas fa-bookmark"></i> Save Event</a></li>
                     <li><a href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=${this.props.fn.getGoogleTime(this.props.eventPageData)}&text=${this.props.eventPageData.title}&location=Toronto+Public+Library+${this.props.eventPageData.library}&details=${this.props.eventPageData.description}`}><i className="fas fa-calendar-plus"></i> Add to Calendar</a></li>
                 </ul>
             </main>
