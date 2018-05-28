@@ -43,7 +43,7 @@ class UpcomingEvents extends React.Component {
                         </div>
                     )
                 })}
-                <button className="button" href="#" onClick={this.loadMore}>See more events...</button>
+                {this.state.loadNumber === 10 && <button className="button" href="#" onClick={this.loadMore}>See more events...</button>}
             </section>
         )
     }

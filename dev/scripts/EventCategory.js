@@ -49,7 +49,7 @@ class EventCategory extends React.Component {
                 </div>
                 )
             })}
-            <button className="button" href="#" onClick={this.loadMore}>See more events...</button>
+            {this.state.loadNumber === 3 && <button className="button" href="#" onClick={this.loadMore}>See more events...</button>}
         </section>
         )
     }
