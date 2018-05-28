@@ -102,20 +102,28 @@ main .EventCategory, .EventPage {
 }
 
 .EventPage {
-    padding-bottom: 20px;
+    padding-bottom: 20px 10px;
     img {
         width: 300px;
-        padding: 0 0 10px 10px;
+        padding: 0 20px 10px 10px;
+        float: left;
+        display: block;
+        @media (max-width: 1000px) {
+            float: none;
+            margin: 0 auto;
+        }
     }
     ul {
-        padding: 10px 0 0 10px;
+        padding: 20px;
         li {
             font-weight: 600;
         }
-        .EventPage__description {
-            padding: 20px 0;
-            font-weight: 300;
-        }
+    }
+    .EventPage__description {
+        padding: 0 20px;
+        font-weight: 300;
+        width: 100%;
+        display: block;
     }
 }
 
@@ -153,6 +161,24 @@ aside {
         }
         a {
             padding: 0 10px;
+        }
+    }
+}
+
+footer {
+    width: 100%;
+    background: $darkBlue;
+    padding: 20px 0;
+    h4 {
+        display: block;
+        color: white;  
+        width: 80%;      
+        margin: 10px auto;
+        a {
+            text-decoration: underline;
+            &:hover {
+                color: $lightBlue
+            }
         }
     }
 }
