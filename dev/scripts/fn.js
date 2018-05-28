@@ -321,6 +321,30 @@ fn.eventPageChange = function (event) {
 
 }
 
+fn.getGoogleTime = function (startTime, endTime) {
+
+	const googleStartDate = startTime.substring(0, 8)
+
+	const googleStartTime = parseInt(startTime.substring(8, 12)) + 400
+
+	const googleDate = googleStartDate + 'T' + googleStartTime + '00Z'
+
+	let googleEndTime = ''
+
+	if (endTime.includes('P')) {
+		googleEndTime = String(parseInt(endTime.substring(0, endTime.indexOf(':'))) + 16) + endTime.substring(endTime.indexOf(':') + 1, endTime.indexOf(':') + 3)
+	} else {
+		googleEndTime = String(parseInt(endTime.substring(0, endTime.indexOf(':'))) + 4) + endTime.substring(endTime.indexOf(':') + 1, endTime.indexOf(':') + 3)
+	}
+
+	const googleEndDate = googleStartDate + 'T' + googleEndTime + '00Z'
+
+	const fullDate = googleDate + '/' + googleEndDate;
+
+	return fullDate
+
+}
+
 
 
 

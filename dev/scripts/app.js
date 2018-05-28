@@ -115,7 +115,7 @@ class App extends React.Component {
 						<h3>{this.state.message}</h3>
 					</div>
 				</div>
-				<Route path="/events/:event_id" component={(parentProps) => <EventPage parentProps={parentProps} eventData={this.state.eventData} eventPageData={this.state.eventPageData}/>} />
+				<Route path="/events/:event_id" component={(parentProps) => <EventPage fn={fn} parentProps={parentProps} eventData={this.state.eventData} eventPageData={this.state.eventPageData}/>} />
 
 				<aside>
 				{(this.state.eventData)
