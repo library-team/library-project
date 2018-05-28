@@ -1,6 +1,10 @@
 import React from 'react';
 
 const Header = (props) => {
+    const displayDropdown = function() {
+        let elementToShow = document.querySelector('dropdownContent').classList;
+        elementToShow.add('show');
+    }
     return (
         <section className="Header clearfix">
             <div className="headerTitle clearfix">
@@ -9,8 +13,18 @@ const Header = (props) => {
                 </div>
                 <h1>Library Events</h1>
             </div>
-            <nav>
-                <ul className="clearfix">
+            <nav className="mobileNav hide">
+                <button onClick={displayDropdown}className="dropdownBtn"><i className="fas fa-bars"></i></button>
+                <ul className="dropdownContent clearfix">
+                    <li><a href="#children">Childrens Events</a></li>
+                    <li><a href="#students">Student Events</a></li>
+                    <li><a href="#seniors">Seniors Events</a></li>
+                    <li><a href="#newcomers">New Canadians Events</a></li>
+                    <li><a href="#arts">Art Events</a></li>
+                </ul>
+            </nav>
+            <nav className="regularNav">
+                <ul className="dropdownContent clearfix">
                     <li><a href="#children">Childrens Events</a></li>
                     <li><a href="#students">Student Events</a></li>
                     <li><a href="#seniors">Seniors Events</a></li>
@@ -27,20 +41,5 @@ const Header = (props) => {
         </section>
     )
 }
-//set stated for logged in
-//bind function below
-//set props in Header component
 
-// loginWithGoogle() {
-//     console.log('clicked the button');
-//     const provider = new firebase.auth.GoogleAuthProvider();
-
-//     firebase.auth().signInWithPopup(provider)
-//         .then((user) => {
-//             console.log(user);
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         })
-// }
 export default Header;
