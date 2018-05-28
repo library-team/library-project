@@ -39,6 +39,7 @@ const SavedEvents = ({fn, user}) => {
                             <Link to={`/events/${event.id}`}
                             onClick={() => fn.eventPageChange(event)}
                             ><i className="fas fa-info-circle"></i> Event Info</Link>
+							{/* <a href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=${this.props.fn.getGoogleTime(this.props.eventPageData.date2, this.props.eventPageData.endtime)}&text=${this.props.eventPageData.title}&location=Toronto+Public+Library+${this.props.eventPageData.library}&details=${this.props.eventPageData.description}`}><i className="fas fa-calendar-plus"></i> Add to Calendar</a> */}
                             <button onClick={() => fn.removeEvent(event.dbKey)}><i className="fas fa-times-circle"></i>Delete Event</button>
                         </li>
                         )

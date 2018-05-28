@@ -17,7 +17,7 @@ class EventCategory extends React.Component {
     }
 
     loadMore() {
-        
+
         this.setState({
             loadNumber: 10
         })
@@ -26,7 +26,7 @@ class EventCategory extends React.Component {
     render() {
 
         return (
-        <section className="EventCategory">
+        <section className="EventCategory" id={this.props.idName} >
             <h2>{this.props.title}</h2>
             {this.props.events.slice(0,this.state.loadNumber).map((event) => {
 
@@ -34,7 +34,7 @@ class EventCategory extends React.Component {
                 <div className="event" key={event.id}>
                     <h3>{event.title}</h3>
                     <h4>{event.date}</h4>
-                    
+
                         <p dangerouslySetInnerHTML={{ __html: event.description }}></p>
 
                         <ul className="links">
@@ -51,7 +51,7 @@ class EventCategory extends React.Component {
                 )
             })}
             <button className="button" href="#" onClick={this.loadMore}>See more events...</button>
-        </section> 
+        </section>
         )
     }
 

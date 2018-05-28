@@ -49,9 +49,9 @@ class App extends React.Component {
 	  user: null,
 	eventData: null,
 	eventPageData: null,
-	dbRefUser: null, 
-	showModal: false, 
-	message: 'hi', 
+	dbRefUser: null,
+	showModal: false,
+	message: 'hi',
 	savedStart: 0
     }
 
@@ -127,11 +127,11 @@ class App extends React.Component {
 					 <React.Fragment>
 
 						{/* <Route exact path="/" component={Hello} /> */}
-						<Route exact path="/" render={() => <EventCategory fn={fn} title="Children's Events" events={this.state.eventData.children} />} />
-						<Route exact path="/" component={() => <EventCategory fn={fn} title="Student Events" events={this.state.eventData.students} />} />
-						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Seniors" events={this.state.eventData.seniors} />} />
-						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Newcomers to Canada" events={this.state.eventData.newcomers} />} />
-						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Art Lovers" events={this.state.eventData.arts} />} />
+						<Route exact path="/" render={() => <EventCategory fn={fn} title="Children's Events" events={this.state.eventData.children} idName="children"/>} />
+						<Route exact path="/" component={() => <EventCategory fn={fn} title="Student Events" events={this.state.eventData.students} idName="students"  />} />
+						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Seniors" events={this.state.eventData.seniors} idName="seniors"  />} />
+						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Newcomers to Canada" events={this.state.eventData.newcomers} idName="newcomers" />} />
+						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Art Lovers" events={this.state.eventData.arts} idName="arts" />} />
 
 					</React.Fragment>
 
