@@ -52,8 +52,9 @@ const SavedEvents = ({fn, user}) => {
 
             </div>
 			<button className={`buttonBottom ${(fn.thisApp().state.savedMobileExpand === true ) ? 'mobileExpand' : '' }`}
-				onClick={() => {
+				onClick={(e) => {
 					fn.thisApp().setState({ savedMobileExpand: !fn.thisApp().state.savedMobileExpand });
+					fn.handleNavClick(e, "Header");
 				} }
 			><i className="fas fa-angle-down"></i></button>
         </section>
