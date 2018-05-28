@@ -11,15 +11,15 @@ const Header = (props) => {
             </div>
             <nav>
                 <ul className="clearfix">
-                    <li><a href="">Childrens Events</a></li>
-                    <li><a href="">Youth Events</a></li>
-                    <li><a href="">Seniors Events</a></li>
-                    <li><a href="">New Canadians Events</a></li>
-                    <li><a href="">Art Events</a></li>
+                    <li><a href="#children">Childrens Events</a></li>
+                    <li><a href="#students">Student Events</a></li>
+                    <li><a href="#seniors">Seniors Events</a></li>
+                    <li><a href="#newcomers">New Canadians Events</a></li>
+                    <li><a href="#arts">Art Events</a></li>
                 </ul>
             </nav>
             <div className="login">
-            {(props.appState.user === null) 
+            {(props.appState.user === null)
                ? <button onClick={props.fn.loginWithGoogle}>Login</button>
                 : <button onClick={props.fn.logout}>Log Out</button>
             }
