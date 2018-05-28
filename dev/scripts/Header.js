@@ -1,6 +1,10 @@
 import React from 'react';
 
 const Header = (props) => {
+    // const displayDropdown = function() {
+    //     let elementToShow = document.querySelector('dropdownContent').classList;
+    //     elementToShow.add('display');
+    // }
     return (
         <section className="Header clearfix">
             <div className="headerTitle clearfix">
@@ -8,9 +12,10 @@ const Header = (props) => {
                     <img src="../public/assets/bookIcon.svg" alt="Outline of an open book"/>
                 </div>
                 <h1>Library Events</h1>
-            </div>
-            <nav>
-                <ul className="clearfix">
+            </div> 
+            <button  /*onClick={displayDropdown} */ className='dropdownBtn hide'><i className="fas fa-bars"></i></button>
+            <nav className="mainNav mobileHide">
+                <ul className="dropdownContent clearfix">
                     <li><a href="#children">Childrens Events</a></li>
                     <li><a href="#students">Student Events</a></li>
                     <li><a href="#seniors">Seniors Events</a></li>
@@ -27,20 +32,5 @@ const Header = (props) => {
         </section>
     )
 }
-//set stated for logged in
-//bind function below
-//set props in Header component
 
-// loginWithGoogle() {
-//     console.log('clicked the button');
-//     const provider = new firebase.auth.GoogleAuthProvider();
-
-//     firebase.auth().signInWithPopup(provider)
-//         .then((user) => {
-//             console.log(user);
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         })
-// }
 export default Header;
