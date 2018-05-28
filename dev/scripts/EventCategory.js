@@ -44,7 +44,7 @@ class EventCategory extends React.Component {
                             </li>
                             {/* <li><i className="fas fa-info-circle"></i> Event Info</a></li> */}
                             <li><a href="#" onClick={(e)=>{this.props.fn.saveEvent(e, event)}}><i className="fas fa-bookmark"></i> Save Event</a></li>
-                            <li><a href="#"><i className="fas fa-calendar-plus"></i> Add to Calendar</a></li>
+                            {/* <li><a href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=${this.getGoogleTime(this.props.eventPageData.date2, this.props.eventPageData.endtime)}&text=${this.props.eventPageData.title}&location=Toronto+Public+Library+${this.props.eventPageData.library}&details=${this.props.eventPageData.description}`}><i className="fas fa-calendar-plus"></i> Add to Calendar</a></li> */}
                         </ul>
 
                 </div>

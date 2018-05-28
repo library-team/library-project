@@ -35,7 +35,6 @@ class EventPage extends React.Component {
         }
         
         return imageLink
-
     }
     
     render() {
@@ -47,7 +46,7 @@ class EventPage extends React.Component {
                 <h2>{this.props.eventPageData.title}</h2>
                 <img src={this.getImage(this.props.eventPageData)} alt="Image!"/>
                 <ul>
-                    <li>{`Location: ${this.props.eventPageData.library}`}</li>
+                    <li>{`Branch: ${this.props.eventPageData.library}`}</li>
                     <li>{this.props.eventPageData.date}</li>
                     <li>{`${this.props.eventPageData.time} to ${this.props.eventPageData.endtime}`}</li>
                     <li>{this.normalizeEventType(this.props.eventPageData.eventtypes)}</li>
@@ -55,7 +54,7 @@ class EventPage extends React.Component {
                 </ul>
                 <ul className="links">
                     {/* <li><a href="#" onClick={(e) => { this.props.fn.saveEvent(e, event) }}><i className="fas fa-bookmark"></i> Save Event</a></li> */}
-                    <li><a href="#"><i className="fas fa-calendar-plus"></i> Add to Calendar</a></li>
+                    <li><a href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=${this.props.fn.getGoogleTime(this.props.eventPageData.date2, this.props.eventPageData.endtime)}&text=${this.props.eventPageData.title}&location=Toronto+Public+Library+${this.props.eventPageData.library}&details=${this.props.eventPageData.description}`}><i className="fas fa-calendar-plus"></i> Add to Calendar</a></li>
                 </ul>
             </main>
         ) : <div></div>
