@@ -6,13 +6,13 @@ import {
 
 const Header = (props) => {
     return (
-        <section className="Header clearfix">
+        <section className="Header clearfix" id="Header">
             <div className="headerTitle clearfix">
                 <div className="logo">
                     <img src="../public/assets/bookIcon.svg" alt="Outline of an open book"/>
                 </div>
                 <h1>Library Events</h1>
-            </div> 
+            </div>
             <button onClick={() => props.fn.displayDropdown()} className='dropdownBtn hide'><i className="fas fa-bars"></i></button>
             <nav className={`mainNav ${(props.appState.displayHamMenu) ? '' : 'mobileHide'}`}>
                 <ul className={'dropdownContent clearfix'} onClick={() => props.fn.displayDropdown()}>
