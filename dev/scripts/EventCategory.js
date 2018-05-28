@@ -42,7 +42,6 @@ class EventCategory extends React.Component {
                                 <Link to={`/events/${event.id}`}><i className="fas fa-info-circle"></i> Event Info</Link>
                                 {/* <Route path="/events" component={EventPage} /> */}
                             </li>
-                            {/* <li><i className="fas fa-info-circle"></i> Event Info</a></li> */}
                             <li><a href="#" onClick={(e)=>{this.props.fn.saveEvent(e, event)}}><i className="fas fa-bookmark"></i> Save Event</a></li>
                             <li><a href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=${this.props.fn.getGoogleTime(event)}&text=${event.title}&location=Toronto+Public+Library+${event.library}&details=${event.description}`}><i className="fas fa-calendar-plus"></i> Add to Calendar</a></li>
                         </ul>

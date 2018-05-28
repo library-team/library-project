@@ -14,6 +14,7 @@ import Header from './Header';
 import SavedEvents from './SavedEvents';
 import UpcomingEvents from './UpcomingEvents';
 import EventPage from './EventPage.js';
+import Footer from './Footer'
 
 //Other Modules
 import fn from './fn'
@@ -144,6 +145,7 @@ class App extends React.Component {
 				</main>
 				{/* This main will be switched out for EventPage module */}
 			</div>
+			<Footer />
 			</React.Fragment>
 		</Router>
       )
