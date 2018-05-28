@@ -31,16 +31,16 @@
             // transform: translateY(50%);
         }
     }
-    .regularNav {
+    .mainNav {
         border: 2px solid pink;
         margin-top: 37px;
         float: left;
-        .dropdownBtn {
-            font-size: 4rem;
-            border: none; 
-            background: $darkBlue;
-            color: #fff;
-        }
+        // .dropdownBtn {
+        //     font-size: 4rem;
+        //     border: none; 
+        //     background: $darkBlue;
+        //     color: #fff;
+        // }
         ul {
             padding: 0;
             list-style-type: none;
@@ -92,7 +92,7 @@
             width: 60%;
             transform: translateY(50%);
         }
-        nav{
+        .mainNav{
             margin-top: 0;
             ul {
                 margin-left: 20px;
@@ -104,8 +104,21 @@
         }
     }
     @media (max-width: 860px) {
-        nav {
-
+        .headerTitle {
+            transform: none;
+        }
+        .mobileHide {
+            display: none;
+        }
+        .hide {
+            display: block;
+            font-size: 4rem;
+            border: none; 
+            background: $darkBlue;
+            color: #fff;
+            float: right;
+            margin-right: 17%;
+            transform: translateY(50%);
         }
     }
 }
