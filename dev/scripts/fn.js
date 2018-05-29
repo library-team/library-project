@@ -129,10 +129,10 @@ fn.isEventPassed = function (event) {
 	let dateComparison;
 	if (event.enddate1) {
 		dateComparison = fn.compareDates(event.enddate1, today);
-		console.log(event.title , dateComparison);
+		// console.log(event.title , dateComparison);
 	} else {
 		dateComparison = fn.compareDates(event.date1, today);
-		console.log(event.title , dateComparison);
+		// console.log(event.title , dateComparison);
 	}
 
 	return (dateComparison === 1) ? true : false;
@@ -314,6 +314,17 @@ fn.filterByEventType = function (data, eventTypes) {
 
 }
 
+fn.filterByBranch = function (data, branches) { //is array of branch strings strings
+	return data.filter( (event) => {
+		let result = false;
+
+		branches.forEach(branch =>    {
+			//If the event age groups string includes one of the selected age groups then set result to true. Else it will remain false.
+		 if (event.library.includes(branch) === true ) {	result = true; }
+		});
+		return result;
+	});
+}
 
 fn.filterEachEventCategory = function (data) {
 	const ageFilters = {
@@ -345,7 +356,6 @@ fn.filterEachEventCategory = function (data) {
 }
 
 
-
 fn.todayDate = function () {
 	const dateObj = new Date;
 	return `${dateObj.getFullYear()}/${
@@ -365,6 +375,79 @@ fn.filterCategoriesByDate = function (categories) {
 
 }
 
+
+//Geolocation
+
+fn.getNearbyEvents = function (e) {
+	e.preventDefault();
+	const locationPromise = new Promise( (resolve, reject) => {
+		navigator.geolocation.getCurrentPosition( (position) => resolve(position)   );
+	});
+
+	locationPromise.then( (position) => {
+
+		console.log(position.coords.latitude, position.coords.longitude);
+
+		const googleUserLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		// console.log('Google object', googleMapsObj);
+
+		let branchesWithDistance = this.state.branches.map((branch) => {
+			const coord = branch.Point.coordinates.split(',');
+			const lng = coord[0];
+			const lat = coord[1];
+			const googleBranchLocation =  new google.maps.LatLng(lat, lng);
+			const distance = google.maps.geometry.spherical.computeDistanceBetween(googleUserLocation, googleBranchLocation);
+
+			branch.distanceToUser = distance;
+
+			return branch;
+		});
+
+		branchesWithDistance.sort((a,b) => {
+			return a.distanceToUser - b.distanceToUser
+		} );
+
+		const closestBranches = branchesWithDistance.slice(0,3);
+
+		const closestBranchNames = closestBranches.map(branch => branch.name  );
+
+		const nearbyEvents = fn.filterByBranch(this.state.fullData, closestBranchNames);
+
+		const filteredData =  fn.filterCategoriesByDate ( fn.filterEachEventCategory(nearbyEvents) );
+
+		this.setState({
+			nearbyEvents: filteredData,
+			renderNearbyEvents: true
+		});
+
+	} );
+
+
+
+}
+
+
+// osition
+// ​
+// coords: Coordinates
+// ​​
+// accuracy: 30
+// ​​
+// altitude: 0
+// ​​
+// altitudeAccuracy: 0
+// ​​
+// heading: NaN
+// ​​
+// latitude: 43.648171600000005
+// ​​
+// longitude: -79.39789119999999
+// ​​
+// speed: NaN
+// ​​
+// __proto__: CoordinatesPrototype { latitude: Getter, longitude: Getter, altitude: Getter, … }
+// ​
+// timestamp: 1527618736525
 
 
 fn.eventPageChange = function (event) {

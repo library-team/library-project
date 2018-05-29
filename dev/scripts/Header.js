@@ -44,6 +44,12 @@ const Header = (props) => {
                 : <button onClick={props.fn.logout}>Log Out</button>
             }
             </div>
+            <div className="locationButton"   >
+            {(props.appState.fullData)
+               && <button onClick={props.fn.getNearbyEvents} >Events Nearby</button>
+
+            }
+            </div>
             <div className={`homeButton ${(props.appState.displayHomeButton) ? 'display' : 'hide'}`} onClick={() => {
                 props.fn.thisApp().setState({
                     displayHamMenu: false,

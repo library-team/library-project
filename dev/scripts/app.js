@@ -33,15 +33,6 @@ const config = {
 
 firebase.initializeApp(config);
 
-class Hello extends React.Component {
-	render(){
-		return(
-			<div>Helkjfjskhdfsjdhf
-				<Link to="/events">Events</Link>
-			</div>
-		);
-	}
-}
 
 
 class App extends React.Component {
@@ -49,17 +40,18 @@ class App extends React.Component {
     super()
 
     this.state = {
-	//   data: null,
-	  user: null,
-	eventData: null,
-	eventPageData: null,
-	dbRefUser: null,
-	showModal: false,
-	message: 'hi',
-	savedStart: 0,
-	displayHamMenu: false,
-	savedMobileExpand: false, 
-	displayHomeButton: false
+		user: null,
+		fullData: null,
+		eventData: null,
+		eventPageData: null,
+		renderNearbyEvents: false,
+		dbRefUser: null,
+		showModal: false,
+		message: 'hi',
+		savedStart: 0,
+		displayHamMenu: false,
+		savedMobileExpand: false,
+		displayHomeButton: false
     }
 
     //Bind all the 'this' of all functions in fn to App.
@@ -72,7 +64,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-  //login-logout listener, this passes the user object to it's callback. If logged out, it passes null.
+	const dbRefBranches = firebase.database().ref('branchData/branches');
+
+	dbRefBranches.once('value', (snapshot) => this.setState({branches: snapshot.val()}));
+
+
+	//login-logout listener, this passes the user object to it's callback. If logged out, it passes null.
   firebase.auth().onAuthStateChanged(fn.handleAuthChange);
 
 	let dbRef = firebase.database().ref('eventData');
@@ -97,15 +94,18 @@ class App extends React.Component {
       .then((res) => {
 		const data = res.data;
 
-		console.log(data);
+		// console.log(data);
 
+		this.setState({
+			fullData: data
+		});
 
 		const filteredData =  fn.filterCategoriesByDate ( fn.filterEachEventCategory(data) );
 
 		// console.log(`All categories filtered`, filteredData  );
 
 		dbRef.set(filteredData);
-		console.log('filtered data', filteredData)
+		// console.log('filtered data', filteredData)
       }); //End of THEN
 
 		//event listner for scroll to display the home button
@@ -139,7 +139,7 @@ class App extends React.Component {
 
 				<aside className={this.state.savedMobileExpand ? 'hide' : null }  >
 				{(this.state.eventData)
-					&& <UpcomingEvents fn={fn} appState={this.state.eventData.upcoming} />}
+					&& <UpcomingEvents fn={fn} appState={(this.state.renderNearbyEvents) ? this.state.nearbyEvents.upcoming : this.state.eventData.upcoming} />}
 				</aside>
 				<main className={this.state.savedMobileExpand ? 'hide' : null } >
 					{(this.state.eventData)
@@ -147,11 +147,11 @@ class App extends React.Component {
 					 <React.Fragment>
 
 						{/* <Route exact path="/" component={Hello} /> */}
-						<Route exact path="/" render={() => <EventCategory fn={fn} title="Children's Events" events={this.state.eventData.children} idName="children"/>} />
-						<Route exact path="/" component={() => <EventCategory fn={fn} title="Student Events" events={this.state.eventData.students} idName="students"  />} />
-						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Seniors" events={this.state.eventData.seniors} idName="seniors"  />} />
-						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Newcomers to Canada" events={this.state.eventData.newcomers} idName="newcomers" />} />
-						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Art Lovers" events={this.state.eventData.arts} idName="arts" />} />
+						<Route exact path="/" render={() => <EventCategory fn={fn} title="Children's Events" events={(this.state.renderNearbyEvents) ?this.state.nearbyEvents.children :  this.state.eventData.children} idName="children"/>} />
+						<Route exact path="/" component={() => <EventCategory fn={fn} title="Student Events" events={(this.state.renderNearbyEvents) ?this.state.nearbyEvents.students  :this.state.eventData.students} idName="students"  />} />
+						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Seniors" events={(this.state.renderNearbyEvents) ?this.state.nearbyEvents.seniors :this.state.eventData.seniors} idName="seniors"  />} />
+						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Newcomers to Canada" events={(this.state.renderNearbyEvents) ?this.state.nearbyEvents.newcomers :this.state.eventData.newcomers} idName="newcomers" />} />
+						<Route exact path="/" component={() => <EventCategory fn={fn} title="Events for Art Lovers" events={(this.state.renderNearbyEvents) ?this.state.nearbyEvents.arts :this.state.eventData.arts} idName="arts" />} />
 
 					</React.Fragment>
 
