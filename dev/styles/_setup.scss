@@ -90,3 +90,57 @@ main.hide, aside.hide {
         z-index: 10;
     }
 }
+
+ul, li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.button {
+    display: block;
+    width: fit-content;
+    width: -moz-fit-content;
+    border: 1px solid $darkBlue;
+    padding: 15px;
+    color: $darkBlue;
+    background: transparent;
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 20px auto;
+    &:hover {
+        text-decoration: none;
+        background: $darkBlue;
+        color: white;
+    }
+    &--back {
+        margin: 20px 0;
+    }
+}
+
+footer {
+    width: 100%;
+    background: $darkBlue;
+    padding: 20px 0;
+    h4 {
+        display: block;
+        color: white;  
+        width: 80%;      
+        margin: 10px auto;
+        a {
+            text-decoration: underline;
+            &:hover {
+                color: $lightBlue
+            }
+        }
+    }
+}
