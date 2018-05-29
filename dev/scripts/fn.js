@@ -169,6 +169,15 @@ fn.handleNavClick = function(e, id) {
 	}, 100);
 }
 
+fn.displayHomeButton = function() {
+	let { displayHomeButton } = this.state
+	window.scrollY >= 150 ?
+		!displayHomeButton && this.setState({ displayHomeButton: true })
+		:
+		displayHomeButton && this.setState({ displayHomeButton: false })
+
+	this.prev = window.scrollY;
+}
 
 
 fn.getAgeGroups = function (data) {
