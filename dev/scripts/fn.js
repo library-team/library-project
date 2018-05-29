@@ -350,9 +350,7 @@ fn.filterCategoriesByDate = function (categories) {
 
 fn.eventPageChange = function (event) {
 	this.setState({
-		eventPageData: event,
-		displayHamMenu: false,
-		savedMobileExpand: false
+		eventPageData: event
 	});
 
 }
