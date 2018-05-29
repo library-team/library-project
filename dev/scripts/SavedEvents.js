@@ -15,7 +15,14 @@ const SavedEvents = ({fn, user}) => {
             savedEventsArray.unshift(event);
         }
         slicedEventsArray = fn.sliceSavedEvents(savedEventsArray);
-    }
+	}
+	let savedEventsToMap;
+	if (fn.thisApp().state.savedMobileExpand) {
+		savedEventsToMap = savedEventsArray;
+	} else {
+		savedEventsToMap = slicedEventsArray;
+	}
+
     return (
         <section className="SavedEvents clearfix">
             <div className="userImg">
@@ -29,7 +36,7 @@ const SavedEvents = ({fn, user}) => {
                 <button className="buttonRight" onClick={() => fn.handleButtonRight(savedEventsArray.length)}><i className="fas fa-angle-right"></i></button>
                 <ul className="clearfix">
                     {(user.savedEvents)
-                    ? slicedEventsArray.map((event) => {
+                    ? savedEventsToMap.map((event) => {
                         return (
                         <li key={event.dbKey}>
                             <h4 className="eventTitle" >{event.title}</h4>

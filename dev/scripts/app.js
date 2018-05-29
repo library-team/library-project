@@ -7,6 +7,8 @@ import {
   BrowserRouter as Router,
   Route, Link
 } from 'react-router-dom';
+import WindowSizeListener from 'react-window-size-listener';
+
 
 //Components
 import EventCategory from './EventCategory';
@@ -15,6 +17,7 @@ import SavedEvents from './SavedEvents';
 import UpcomingEvents from './UpcomingEvents';
 import EventPage from './EventPage.js';
 import Footer from './Footer'
+
 
 //Other Modules
 import fn from './fn'
@@ -111,6 +114,13 @@ class App extends React.Component {
 		return (
 		<Router>
 			<React.Fragment>
+			<WindowSizeListener onResize={windowSize => {
+				//If window is wider than 820px, collapse mobile expand.
+				if (windowSize.windowWidth >+ 820) {
+					this.setState({savedMobileExpand: false});
+				}
+				// console.log('Window height', windowSize.windowHeight)
+			}}/>
 			<header>
 				<Header fn={fn}  appState={this.state} />
 				{(this.state.user) &&  <SavedEvents fn={fn} user={this.state.user} />}
