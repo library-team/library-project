@@ -70,7 +70,7 @@ class EventPage extends React.Component {
             // <Link className="button button--back" id="event-top" to="/"><i class="far fa-caret-square-left"></i> Back to Main Page</Link>
             <main className="EventPage" id="event">
                 <h2>{this.props.eventPageData.title}</h2>
-                <img src={this.getImage(this.props.eventPageData)} alt="Image!"/>
+                <img src={this.getImage(this.props.eventPageData)} alt="Event Image Loading"/>
                 <ul>
                     <li>{`Branch: ${this.props.eventPageData.library}`}</li>
                     <li>{this.checkEndDate(this.props.eventPageData)}</li>
