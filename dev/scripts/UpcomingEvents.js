@@ -14,14 +14,20 @@ class UpcomingEvents extends React.Component {
         }
 
         this.loadMore = this.loadMore.bind(this);
+        this.loadFewer = this.loadFewer.bind(this);
     }
 
     loadMore() {
 
-        console.log('clickity click');
-
         this.setState({
             loadNumber: 20
+        })
+    }
+
+    loadFewer() {
+
+        this.setState({
+            loadNumber: 10
         })
     }
 
@@ -46,7 +52,7 @@ class UpcomingEvents extends React.Component {
                         </div>
                     )
                 })}
-                {this.state.loadNumber === 10 && <button className="button" href="#" onClick={this.loadMore}>See more events...</button>}
+                {this.state.loadNumber === 10 ? <button className="button" href="#" onClick={this.loadMore}>See more events...</button> : <button className="button" href="#" onClick={this.loadFewer}>See fewer events...</button>}
             </section>
         )
     }

@@ -14,12 +14,20 @@ class EventCategory extends React.Component {
         }
 
         this.loadMore = this.loadMore.bind(this);
+        this.loadFewer = this.loadFewer.bind(this);
     }
 
     loadMore() {
 
         this.setState({
             loadNumber: 10
+        })
+    }
+
+    loadFewer() {
+
+        this.setState({
+            loadNumber: 3
         })
     }
 
@@ -74,7 +82,7 @@ class EventCategory extends React.Component {
                 </div>
                 )
             })}
-            {this.state.loadNumber === 3 && <button className="button" href="#" onClick={this.loadMore}>See more events...</button>}
+                {this.state.loadNumber === 3 ? <button className="button" href="#" onClick={this.loadMore}>See more events...</button> : <button className="button" href="#" onClick={this.loadFewer}>See fewer events...</button>}
         </section>
         )
     }
