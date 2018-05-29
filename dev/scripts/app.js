@@ -129,10 +129,12 @@ class App extends React.Component {
 			</header>
 			<div className="wrapper clearfix">
 					<div className={`modal ${(this.state.showModal) ? 'show' : ''}`} onClick={fn.handleModalClick}>
-					<div className='modalContent'>
-						<h3>{this.state.message}</h3>
-					</div>
-				</div>
+						<div className='modalContent'>
+								<div><i className="fas fa-times-circle"></i></div>
+							<h3>{this.state.message}</h3>
+							<button onClick={fn.loginWithGoogle}>Login</button>
+						</div> {/* modalContent */}
+					</div> {/* modal container */}
 				<Route path="/events/:event_id" component={(parentProps) => <EventPage fn={fn} parentProps={parentProps} eventData={this.state.eventData} eventPageData={this.state.eventPageData}/>} />
 
 				<aside className={this.state.savedMobileExpand ? 'hide' : null }  >
