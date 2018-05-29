@@ -25,31 +25,31 @@ class EventCategory extends React.Component {
 
     shortenDescription(description) {
 
-        const newDes = description.split(/<br\s?\/?>/)        
+        const newDes = description.split(/<br\s?\/?>/)
             .filter(function(string) {
             return string !== ""
-            })        
+            })
             .splice(0,2).join("<br><br>");
 
         return newDes
 
         // console.log(description);
-        
+
 
         // return description
 
-        /* 
+        /*
             <br\s?\/?>
         */
 
- 
+
     }
 
     render() {
 
         return (
         <section className="EventCategory" id={this.props.idName} >
-            <h2>{this.props.title}</h2>
+            <h2 className={(this.props.fn.thisApp().state.renderNearbyEvents) ? 'nearby' : null } >{this.props.title}</h2>
             {this.props.events.slice(0,this.state.loadNumber).map((event) => {
 
                 return (
