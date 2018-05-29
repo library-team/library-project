@@ -45,8 +45,12 @@ const Header = (props) => {
             }
             </div>
             <div className="locationButton"   >
-            {(props.appState.fullData)
+            {(props.appState.fullData && props.appState.renderNearbyEvents === false )
                && <button onClick={props.fn.getNearbyEvents} >Events Nearby</button>
+
+            }
+            {( props.appState.renderNearbyEvents === true )
+               && <button onClick={() => props.fn.thisApp().setState({renderNearbyEvents: false })} >Citywide Events</button>
 
             }
             </div>
