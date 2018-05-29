@@ -23,6 +23,28 @@ class EventCategory extends React.Component {
         })
     }
 
+    shortenDescription(description) {
+
+        const newDes = description.split(/<br\s?\/?>/)        
+            .filter(function(string) {
+            return string !== ""
+            })        
+            .splice(0,2).join("<br><br>");
+
+        return newDes
+
+        // console.log(description);
+        
+
+        // return description
+
+        /* 
+            <br\s?\/?>
+        */
+
+ 
+    }
+
     render() {
 
         return (
@@ -35,7 +57,7 @@ class EventCategory extends React.Component {
                     <h3>{event.title}</h3>
                     <h4>{event.date}</h4>
 
-                        <p dangerouslySetInnerHTML={{ __html: event.description }}></p>
+                        <p dangerouslySetInnerHTML={{ __html: this.shortenDescription(event.description) }}></p>
 
                         <ul className="links">
                             <li onClick={() => this.props.fn.eventPageChange(event)}>
