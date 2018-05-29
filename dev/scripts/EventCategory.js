@@ -60,7 +60,10 @@ class EventCategory extends React.Component {
                         <p dangerouslySetInnerHTML={{ __html: this.shortenDescription(event.description) }}></p>
 
                         <ul className="links">
-                            <li onClick={() => this.props.fn.eventPageChange(event)}>
+                            <li onClick={(e) => {
+                                this.props.fn.eventPageChange(event)
+                                this.props.fn.handleNavClick(e, 'event')
+                                }}>
                                 <Link to={`/events/${event.id}`}><i className="fas fa-info-circle"></i> Event Info</Link>
                                 {/* <Route path="/events" component={EventPage} /> */}
                             </li>
