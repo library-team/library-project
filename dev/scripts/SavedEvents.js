@@ -43,12 +43,15 @@ const SavedEvents = ({fn, user}) => {
                             <h4>{event.date}</h4>
                             <h4>{event.time}</h4>
                             <h4>{event.library}</h4>
-                            <Link to={`/events/${event.id}`}
-                            onClick={(e) => {
+							{/* Change the CSS to accomodate the parent element */}
+							<a onClick={(e) => {
 								fn.eventPageChange(event);
 								fn.handleNavClick(e, 'event');
-							} }
-                            ><i className="fas fa-info-circle"></i> Event Info</Link>
+							} } >
+								<Link to={`/events/${event.id}`} >
+									<i className="fas fa-info-circle"></i> Event Info
+								</Link>
+							</a>
 							<a href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=${fn.getGoogleTime(event)}&text=${event.title}&location=Toronto+Public+Library+${event.library}&details=${event.description}`}><i className="fas fa-calendar-plus"></i> Calendar</a>
                             <button className="deleteEvent"  onClick={() => fn.removeEvent(event.dbKey)}><i className="fas fa-times-circle"></i> Delete Event</button>
                         </li>
