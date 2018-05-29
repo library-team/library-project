@@ -162,6 +162,12 @@ fn.displayDropdown = function() {
 
 fn.handleNavClick = function(e, id) {
 	e.preventDefault();
+
+	this.setState({
+		displayHamMenu: false,
+		savedMobileExpand: false
+	});
+
 	setTimeout(() => {
 		document.querySelector('#'+ id).scrollIntoView({
 			behavior: 'smooth'
@@ -344,8 +350,10 @@ fn.filterCategoriesByDate = function (categories) {
 
 fn.eventPageChange = function (event) {
 	this.setState({
-		eventPageData: event
-	})
+		eventPageData: event,
+		displayHamMenu: false,
+		savedMobileExpand: false
+	});
 
 }
 
@@ -364,7 +372,7 @@ fn.getGoogleTime = function (event) {
 	const googleStartDate = startDate + 'T' + startTime + '00Z'
 
 	let endDate = ''
-	
+
 	let endTime = ''
 
 	if (event.enddate1) {

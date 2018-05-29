@@ -44,7 +44,10 @@ const SavedEvents = ({fn, user}) => {
                             <h4>{event.time}</h4>
                             <h4>{event.library}</h4>
                             <Link to={`/events/${event.id}`}
-                            onClick={() => fn.eventPageChange(event)}
+                            onClick={(e) => {
+								fn.eventPageChange(event);
+								fn.handleNavClick(e, 'event');
+							} }
                             ><i className="fas fa-info-circle"></i> Event Info</Link>
 							<a href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=${fn.getGoogleTime(event)}&text=${event.title}&location=Toronto+Public+Library+${event.library}&details=${event.description}`}><i className="fas fa-calendar-plus"></i> Calendar</a>
                             <button className="deleteEvent"  onClick={() => fn.removeEvent(event.dbKey)}><i className="fas fa-times-circle"></i> Delete Event</button>
@@ -61,7 +64,9 @@ const SavedEvents = ({fn, user}) => {
 			<button className={`buttonBottom ${(fn.thisApp().state.savedMobileExpand === true ) ? 'mobileExpand' : '' }`}
 				onClick={(e) => {
 					fn.thisApp().setState({ savedMobileExpand: !fn.thisApp().state.savedMobileExpand });
-					fn.handleNavClick(e, "Header");
+					if (fn.thisApp().state.savedMobileExpand === true ) {
+						fn.handleNavClick(e, "Header");
+					}
 				} }
 			><i className="fas fa-angle-down"></i></button>
         </section>
