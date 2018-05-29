@@ -82,7 +82,7 @@ class App extends React.Component {
 
     axios({
       method: 'GET',
-      url: 'http://proxy.hackeryou.com',
+      url: 'https://proxy.hackeryou.com',
       dataResponse: 'json',
       params: {
         reqUrl: 'https://opendata.tpl.ca/resources/events',
