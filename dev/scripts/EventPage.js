@@ -10,15 +10,6 @@ class EventPage extends React.Component {
 
     }
 
-    // componentDidMount() {
-
-    //     document.querySelector('#event').scrollIntoView({
-    //         behavior: 'smooth'
-    //     })
-    // }
-
-    // this.props.eventPageData.eventtypes
-
     normalizeEventType(eventTypeString) {
         const eventType = eventTypeString.split(',')
             .filter(function (type) {
@@ -42,7 +33,9 @@ class EventPage extends React.Component {
         if (eventData.otherinfo) {
             const otherInfo = JSON.parse(this.props.eventPageData.otherinfo)
             
-            if (otherInfo.largeImageURL) {
+            if (otherInfo === null) {
+                imageLink = '../public/assets/bookIcon--dark.svg'
+            } else if (otherInfo.largeImageURL) {
                 imageLink = otherInfo.largeImageURL;
             } else if (otherInfo.mediumImageURL) {
                 imageLink = otherInfo.mediumImageURL;
