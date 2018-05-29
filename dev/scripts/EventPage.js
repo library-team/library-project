@@ -10,12 +10,12 @@ class EventPage extends React.Component {
 
     }
 
-    componentDidMount() {
+    // componentDidMount() {
 
-        document.querySelector('#event-top').scrollIntoView({
-            behavior: 'smooth'
-        })
-    }
+    //     document.querySelector('#event').scrollIntoView({
+    //         behavior: 'smooth'
+    //     })
+    // }
 
     // this.props.eventPageData.eventtypes
 
@@ -40,7 +40,18 @@ class EventPage extends React.Component {
         let imageLink = '';
 
         if (eventData.otherinfo) {
-            imageLink = JSON.parse(this.props.eventPageData.otherinfo).largeImageURL
+            const otherInfo = JSON.parse(this.props.eventPageData.otherinfo)
+            
+            if (otherInfo.largeImageURL) {
+                imageLink = otherInfo.largeImageURL;
+            } else if (otherInfo.mediumImageURL) {
+                imageLink = otherInfo.mediumImageURL;
+            } else if (otherInfo.smallImageURL) {
+                imageLink = otherInfo.smallImageURL
+            } else {
+                imageLink = '../public/assets/bookIcon--dark.svg'
+            }
+
         } else {
             imageLink = '../public/assets/bookIcon--dark.svg'
         }
@@ -62,8 +73,8 @@ class EventPage extends React.Component {
         console.log(this.props.eventPageData);
         
         return this.props.eventPageData ? (
-            <React.Fragment>
-            <Link className="button button--back" id="event-top" to="/"><i class="far fa-caret-square-left"></i> Back to Main Page</Link>
+            // <React.Fragment>
+            // <Link className="button button--back" id="event-top" to="/"><i class="far fa-caret-square-left"></i> Back to Main Page</Link>
             <main className="EventPage" id="event">
                 <h2>{this.props.eventPageData.title}</h2>
                 <img src={this.getImage(this.props.eventPageData)} alt="Image!"/>
@@ -79,7 +90,6 @@ class EventPage extends React.Component {
                     <li><a href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=${this.props.fn.getGoogleTime(this.props.eventPageData)}&text=${this.props.eventPageData.title}&location=Toronto+Public+Library+${this.props.eventPageData.library}&details=${this.props.eventPageData.description}`}><i className="fas fa-calendar-plus"></i> Add to Calendar</a></li>
                 </ul>
             </main>
-            </React.Fragment>
         ) : <div></div>
     }
 }

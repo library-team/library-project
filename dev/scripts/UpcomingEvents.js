@@ -36,7 +36,10 @@ class UpcomingEvents extends React.Component {
                         <div className="event" key={i}>
                             <h3>{event.title}</h3>
                             <h4>{event.date}</h4>
-                            <li onClick={() => this.props.fn.eventPageChange(event)}>
+                            <li onClick={(e) => {
+                                this.props.fn.eventPageChange(event)
+                                this.props.fn.handleNavClick(e, 'event')
+                                }}>
                                 <Link to={`/events/${event.id}`}><i className="fas fa-info-circle"></i> Event Info</Link>
                             </li>
                             <li><a href="#" onClick={(e) => { this.props.fn.saveEvent(e, event) }}><i className="fas fa-bookmark"></i> Save Event</a></li>
