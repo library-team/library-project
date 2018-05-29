@@ -44,6 +44,14 @@ const Header = (props) => {
                 : <button onClick={props.fn.logout}>Log Out</button>
             }
             </div>
+            <div className={`homeButton ${(props.appState.displayHomeButton) ? 'display' : 'hide'}`} onClick={() => {
+                props.fn.thisApp().setState({
+                    displayHamMenu: false,
+                    savedMobileExpand: false
+                });
+                document.querySelector('#Header').scrollIntoView({behavior: 'smooth'})}}>
+                <Link to="/#Header"><i className="fas fa-home" title="Back to Top of Page"></i></Link>
+            </div>
         </section>
     )
 }

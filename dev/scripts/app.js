@@ -58,7 +58,8 @@ class App extends React.Component {
 	message: 'hi',
 	savedStart: 0,
 	displayHamMenu: false,
-	savedMobileExpand: false
+	savedMobileExpand: false, 
+	displayHomeButton: false
     }
 
     //Bind all the 'this' of all functions in fn to App.
@@ -107,7 +108,8 @@ class App extends React.Component {
 		console.log('filtered data', filteredData)
       }); //End of THEN
 
-
+		//event listner for scroll to display the home button
+		window.addEventListener('scroll', fn.displayHomeButton);
   } //End of Component Did Mount
 
     render() {
