@@ -121,6 +121,25 @@ fn.sliceSavedEvents = function(array) {
 		return initialSlice;
 	}
 }
+
+fn.isEventPassed = function (event) {
+	const today = fn.todayDate();
+
+	// console.log('isEventPassed');
+	let dateComparison;
+	if (event.enddate1) {
+		dateComparison = fn.compareDates(event.enddate1, today);
+		console.log(event.title , dateComparison);
+	} else {
+		dateComparison = fn.compareDates(event.date1, today);
+		console.log(event.title , dateComparison);
+	}
+
+	return (dateComparison === 1) ? true : false;
+
+
+}
+
 fn.handleButtonLeft = function(numberSaved) {
 	let initialStartIndex = this.state.savedStart;
 	let currentIndex;

@@ -38,7 +38,7 @@ const SavedEvents = ({fn, user}) => {
                     {(user.savedEvents)
                     ? savedEventsToMap.map((event) => {
                         return (
-                        <li key={event.dbKey}>
+                        <li key={event.dbKey} className={(fn.isEventPassed(event)) ? 'fadedOut'  : null  } >
                             <h4 className="eventTitle" >{event.title}</h4>
                             <h4>{event.date}</h4>
                             <h4>{event.time}</h4>
