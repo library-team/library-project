@@ -5,53 +5,60 @@
     color: #fff;
     position: relative;
     .headerTitle {
-        width: 30%;
-        margin-left: 2.5%;
+        width: 350px;
+        margin-left: 2%;
+        margin-top: 20px;
         float: left;
-        position: relative;
+        //position: relative;
         .logo{
-            width: 15%;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            width: 20%;
+            // position: absolute;
+            // top: 50%;
+            // transform: translateY(-50%);
+            float: left;
             img {
                 width: 100%;
             }
         }
         h1 {
             float: left;
-            margin-left: 15%;
+            margin: 12px;
+            //margin-left: 21%;
         }
     }
     .mainNav {
-        margin-top: 37px;
-        float: left;
+        margin-top: 40px;
+        margin-right: 2%;
+        float: right;
         ul {
             padding: 0;
             list-style-type: none;
             li {
                 float: left;
                 a {
-                    font-size: 1.4rem;
                     color: #fff;
                     text-decoration: none;
                     padding: 5px 10px;
                 }
                 a:hover {
-                    background: $red;
+                    text-decoration: underline;
                     color: $lightBlue;
                 }
             }
         }
     }
     .headerButtons {
-        border: 1px solid pink;
+        margin-right: 2%;
+        float: right;
+        padding: 7px 10px;
+        width: 350px;
         .login, .locationButton {
-            position: absolute;
-            right: 1%;
+            margin: 5px;
+            float: left;
             button {
+                width: 154px;
                 font-size: 1.4rem;
-                padding: 10px 16px;
+                padding: 10px;
                 background: $mediumBlue;
                 color: #fff;
                 border-radius: 6px;
@@ -61,15 +68,6 @@
                     color: $lightBlue;
                 }
             }
-        }
-        .login {
-            top: 5%;
-            button {
-                padding: 10px 49px;
-            }
-        }
-        .locationButton {
-            bottom: 5%;
         }
     }
     .homeButton {
@@ -111,7 +109,6 @@
         background: $darkBlue;
         color: #fff;
         float: right;
-        margin-right: 17%;
         transform: translateY(50%);
     }
     .display {
@@ -120,97 +117,92 @@
     .hide {
         display: none;
     }
- //HEADER MEDIA QUERIES 
-    @media (max-width: 1135px) {
-        .headerTitle {
-            width: 25%;
-        }
-        .mainNav {
-            a {
-                font-size: 1.4rem;
-            }
+
+
+ //HEADER MEDIA QUERIES ======================================
+    @media (min-width: 1280px) {
+        .headerButtons {
+            float: none;
+            margin-left: calc(100% - 350px);
         }
     }
-    @media (max-width: 1050px) {
-        .headerTitle {
-            width: 35%;
-            transform: translateY(50%);
-        }
-        .mainNav{
-            margin-top: 0;
-            ul {
-                margin-left: 20px;
-                li {
-                    float: none;
-                    padding: 5px;
-                    margin: 0;
-                }
-            }
-        }
-        .login, .locationButton {
-            top: 50%;
-        }
-        .login {
-            right: 5%;
-        }
-        .locationButton {
-            right: 21%;
-        }
-    }
-    @media (max-width: 860px) {
-        .headerTitle {
-            transform: none;
-        }
+    @media (max-width: 1080px) {
         .mobileHide {
             display: none;
         }
         .dropdownBtn {
             display: block;
+            float: right;
+            margin-right: 2%;
         }
         .mainNav {
             position: absolute;
             z-index: 20;
-            right: 17%;
-            top: 100%;
+            right: 1%;
+            top: 60%;
             background: $darkBlue;
-        }
-        .homeButton {
-            width: 75px;
-            height: 75px;
-            i {
-                font-size: 2.5rem; 
+            ul {
+                padding: 10px;
+                li {
+                    float: none;
+                    padding: 5px;
+                }
             }
-        }
+        }  
+        .headerButtons {
+            float: right;
+            margin-top: 2%;
+        }  
     }
-    @media (max-width: 630px) {
+    @media (max-width: 800px) {
         .headerTitle {
-            width: 40%;
-            h1 {
-                font-size: 2.5rem;
-            }
-        }
-        .hide {
-            margin-right: 20%;
-            transform: translateY(30%);
-        }
-        .mainNav {
-            right: 20%;
-            top: 100%;
-        }
-    }
-    @media (max-width: 535px) {
-        .headerTitle {
-            float: none;
             width: 100%;
+            .logo {
+                width: 10%;
+            }
         }
-        .hide {
+        .dropdownBtn {
+            margin-left: 2%;
             float: none;
-            transform: translateY(0);
-            margin: 0 auto;
+            display: inline-block;
         }
         .mainNav {
-            right: 50%;
-            transform: translateX(50%);
+            top: 75%;
+            left: 2%;
+        }
+    }
+    @media (max-width: 640px) {
+        .headerTitle {
+            .logo {
+                width: 15%;
+            }
+            h1 {
+                margin-top: 25px;
+            }
+        }
+        .dropdownBtn {
+            transform: none;
+            margin-top: 2%;
+        }
+    }
+    @media (max-width: 430px) {
+        .headerTitle {
+            h1 {
+                margin-top: 10px;
+            }
+        }
+        .dropdownBtn {
+            float: left;
+            margin-top: 25px;
+        }
+        .headerButtons {
+            float: right;
+            width: 160px;
+            padding: 0;
+            .login,
+            .locationButton {
+                float: none;
+            }
         }
     }
 }

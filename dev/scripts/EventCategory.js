@@ -40,17 +40,6 @@ class EventCategory extends React.Component {
             .splice(0,2).join("<br><br>");
 
         return newDes
-
-        // console.log(description);
-
-
-        // return description
-
-        /*
-            <br\s?\/?>
-        */
-
-
     }
 
     render() {

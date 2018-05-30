@@ -38,24 +38,24 @@ const Header = (props) => {
                     </li>
                 </ul>
             </nav>
-            <div className="headerButtons">
+            <div className="headerButtons clearfix">
                 <div className="login">
-                {(props.appState.user === null)
-                   ? <button onClick={props.fn.loginWithGoogle}>Login</button>
-                    : <button onClick={props.fn.logout}>Log Out</button>
-                }
+                    {(props.appState.user === null)
+                    ? <button onClick={props.fn.loginWithGoogle}>Login</button>
+                        : <button onClick={props.fn.logout}>Log Out</button>
+                    }
                 </div>
                 <div className="locationButton">
-                {(props.appState.fullData && props.appState.renderNearbyEvents === false )
-                   && <button onClick={props.fn.getNearbyEvents} >Events Nearby</button>
-    
-                }
-                {( props.appState.renderNearbyEvents === true )
-                   && <button onClick={() => props.fn.thisApp().setState({renderNearbyEvents: false })} >Citywide Events</button>
-                }
+                    {(props.appState.fullData && props.appState.renderNearbyEvents === false )
+                    && <button onClick={props.fn.getNearbyEvents} >Events Nearby</button>
+        
+                    }
+                    {( props.appState.renderNearbyEvents === true )
+                    && <button onClick={() => props.fn.thisApp().setState({renderNearbyEvents: false })} >Citywide Events</button>
+                    }
                 </div>
             </div> {/* header button container */}
-            <div className={`homeButton ${(props.appState.displayHomeButton) ? 'display' : 'hide'}`} onClick={() => {
+            <div className={`homeButton ${(props.appState.displayHomeButton && !props.appState.savedMobileExpand) ? 'display' : 'hide'}`} onClick={() => {
                 props.fn.thisApp().setState({
                     displayHamMenu: false,
                     savedMobileExpand: false

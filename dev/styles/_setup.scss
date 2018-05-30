@@ -42,7 +42,6 @@ main.hide, aside.hide {
 }
 
 .modalContent {
-    border: 1px solid green;
     position: relative;
     top: 50%;
     left: 50%;
@@ -77,7 +76,6 @@ main.hide, aside.hide {
     }
 }
 .modal {
-    border: 1px solid red;
     display: none;
     position: fixed;
     top: 0;
