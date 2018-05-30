@@ -5,12 +5,13 @@
     color: #fff;
     position: relative;
     .headerTitle {
-        width: 30%;
-        margin-left: 2.5%;
+        width: fit-content;
+        width: -moz-fit-content;
+        margin-left: 2%;
         float: left;
         position: relative;
         .logo{
-            width: 15%;
+            width: 20%;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -20,11 +21,11 @@
         }
         h1 {
             float: left;
-            margin-left: 15%;
+            margin-left: 21%;
         }
     }
     .mainNav {
-        margin-top: 37px;
+        margin: 40px 0 0 10%;
         float: left;
         ul {
             padding: 0;
@@ -32,26 +33,28 @@
             li {
                 float: left;
                 a {
-                    font-size: 1.4rem;
                     color: #fff;
                     text-decoration: none;
                     padding: 5px 10px;
                 }
                 a:hover {
-                    background: $red;
+                    text-decoration: underline;
                     color: $lightBlue;
                 }
             }
         }
     }
     .headerButtons {
-        border: 1px solid pink;
+        float: right;
+        padding: 7px 10px;
+        width: 350px;
         .login, .locationButton {
-            position: absolute;
-            right: 1%;
+            margin: 5px;
+            float: left;
             button {
+                width: 154px;
                 font-size: 1.4rem;
-                padding: 10px 16px;
+                padding: 10px;
                 background: $mediumBlue;
                 color: #fff;
                 border-radius: 6px;
@@ -61,15 +64,6 @@
                     color: $lightBlue;
                 }
             }
-        }
-        .login {
-            top: 5%;
-            button {
-                padding: 10px 49px;
-            }
-        }
-        .locationButton {
-            bottom: 5%;
         }
     }
     .homeButton {
@@ -111,7 +105,6 @@
         background: $darkBlue;
         color: #fff;
         float: right;
-        margin-right: 17%;
         transform: translateY(50%);
     }
     .display {
@@ -120,97 +113,52 @@
     .hide {
         display: none;
     }
- //HEADER MEDIA QUERIES 
-    @media (max-width: 1135px) {
-        .headerTitle {
-            width: 25%;
-        }
-        .mainNav {
-            a {
-                font-size: 1.4rem;
-            }
-        }
-    }
-    @media (max-width: 1050px) {
-        .headerTitle {
-            width: 35%;
-            transform: translateY(50%);
-        }
-        .mainNav{
-            margin-top: 0;
-            ul {
-                margin-left: 20px;
-                li {
-                    float: none;
-                    padding: 5px;
-                    margin: 0;
-                }
-            }
-        }
-        .login, .locationButton {
-            top: 50%;
-        }
-        .login {
-            right: 5%;
-        }
-        .locationButton {
-            right: 21%;
-        }
-    }
-    @media (max-width: 860px) {
-        .headerTitle {
-            transform: none;
-        }
+
+
+ //HEADER MEDIA QUERIES ======================================
+    @media (max-width: 1080px) {
         .mobileHide {
             display: none;
         }
         .dropdownBtn {
             display: block;
+            float: right;
+            margin-right: 0;
         }
         .mainNav {
             position: absolute;
             z-index: 20;
-            right: 17%;
-            top: 100%;
+            right: 1%;
+            top: 60%;
             background: $darkBlue;
-        }
-        .homeButton {
-            width: 75px;
-            height: 75px;
-            i {
-                font-size: 2.5rem; 
+            ul {
+                padding: 10px;
+                li {
+                    float: none;
+                    padding: 5px;
+                }
             }
-        }
+        }  
+        .headerButtons {
+            float: right;
+            margin-top: 2%;
+        }  
     }
-    @media (max-width: 630px) {
+    @media (max-width: 690px) {
         .headerTitle {
-            width: 40%;
-            h1 {
-                font-size: 2.5rem;
-            }
-        }
-        .hide {
-            margin-right: 20%;
-            transform: translateY(30%);
-        }
-        .mainNav {
-            right: 20%;
-            top: 100%;
-        }
-    }
-    @media (max-width: 535px) {
-        .headerTitle {
-            float: none;
             width: 100%;
+            .logo {
+                width: 10%;
+            }
+            h1 {
+                margin-left: 11%;
+            }
         }
-        .hide {
-            float: none;
-            transform: translateY(0);
-            margin: 0 auto;
+        .dropdownBtn {
+            margin-right: 12%;
         }
         .mainNav {
-            right: 50%;
-            transform: translateX(50%);
+            top: 75%;
         }
     }
 }

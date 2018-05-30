@@ -22,21 +22,18 @@ fn.handleChange = function (e) {
 
 
 fn.loginWithGoogle = function () {
-	console.log('clicked the button');
 	const provider = new firebase.auth.GoogleAuthProvider();
 
 	firebase.auth().signInWithPopup(provider);
 }
 
 fn.logout = function () {
-	console.log('log out function')
 	firebase.auth().signOut();
 }
 
 
 fn.handleAuthChange = function (user) {
 	//If the user info returned from google popup is not null, then the user is logged in
-	console.log(`user from handle auth change`, user);
 	if (user !== null) {
 		let dbRefUser = firebase.database().ref('users/'+ user.uid);
 		//Add value listener to user node in database
@@ -51,7 +48,6 @@ fn.handleAuthChange = function (user) {
 
 			this.dbRefUser = dbRefUser;
 		  } else { //if the user does not already exist in the database- create them
-			console.log('new user created');
 			const loggedInUser = {
 			  id: user.uid,
 			  name: user.displayName,
@@ -67,7 +63,6 @@ fn.handleAuthChange = function (user) {
 
 		});
 	} else { //user is logging out
-		console.log(`auth change log out`)
 		this.setState({
 		loggedIn: false,
 		user: null
@@ -176,7 +171,6 @@ fn.displayDropdown = function() {
 	this.setState({
 		displayHamMenu: !this.state.displayHamMenu
 	})
-	console.log('clicked hamburger');
 }
 
 fn.handleNavClick = function(e, id) {
